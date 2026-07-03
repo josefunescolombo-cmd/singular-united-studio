@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/web-singular-united-studio-v2.html" }
+  ]
+}
