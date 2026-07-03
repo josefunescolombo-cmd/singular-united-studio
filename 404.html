@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página no encontrada — Singular United Studio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #0e0d0b;
+      --cream: #f4efe6;
+      --bronze: #b8996a;
+      --muted: rgba(14,13,11,0.45);
+      --head: 'Georgia', serif;
+      --body: system-ui, -apple-system, sans-serif;
+    }
+    html, body { height: 100%; }
+    body {
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--body);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .num {
+      font-family: var(--head);
+      font-size: clamp(6rem, 20vw, 12rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: rgba(184,153,106,0.18);
+      user-select: none;
+    }
+    h1 {
+      font-family: var(--head);
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-top: -16px;
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 0.9rem;
+      color: rgba(244,239,230,0.5);
+      line-height: 1.7;
+      max-width: 360px;
+      margin-bottom: 40px;
+    }
+    a.btn {
+      display: inline-block;
+      padding: 13px 32px;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 100px;
+      transition: background 0.2s, color 0.2s;
+    }
+    a.btn:hover { background: var(--bronze); color: var(--cream); }
+    .logo {
+      position: fixed;
+      top: 28px; left: 32px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(244,239,230,0.4);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <a href="/" class="logo">Singular United Studio</a>
+  <div class="num">404</div>
+  <h1>Esta página no existe</h1>
+  <p>Puede que hayas seguido un enlace roto o que la dirección haya cambiado.</p>
+  <a href="/" class="btn">Volver al inicio</a>
+</body>
+</html>
