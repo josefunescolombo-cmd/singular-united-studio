@@ -1,8 +1,5 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/web-singular-united-studio-v2.html" }
-  ],
-  "errors": [
-    { "statusCode": 404, "destination": "/404.html" }
   ]
 }
