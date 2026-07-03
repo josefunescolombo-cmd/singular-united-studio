@@ -6243,14 +6243,14 @@ footer {
       list.innerHTML='';
       tracks.forEach((t,idx)=>{
         const row=document.createElement('div');
-        row.className='stem-row'; row.dataset.idx=idx; row.dataset.mode='despues';
+        row.className='stem-row'; row.dataset.idx=idx; row.dataset.mode='antes';
         row.innerHTML=`
           <div class="stem-row-head">
             <div class="stem-row-play-btn"><svg width="13" height="13" viewBox="0 0 13 13" fill="currentColor"><path d="M2 1L12 6.5L2 12V1Z"/></svg></div>
             <div class="stem-row-toggle">
-              <span class="stem-toggle-lbl">Antes</span>
-              <button class="stem-toggle despues" aria-label="Cambiar versión"><span class="stem-toggle-thumb"></span></button>
-              <span class="stem-toggle-lbl on">Después</span>
+              <span class="stem-toggle-lbl on">Antes</span>
+              <button class="stem-toggle" aria-label="Cambiar versión"><span class="stem-toggle-thumb"></span></button>
+              <span class="stem-toggle-lbl">Después</span>
             </div>
             <div class="stem-row-cover"><img src="${t.cover}" alt="${t.title}" loading="lazy"></div>
             <div class="stem-row-info">
