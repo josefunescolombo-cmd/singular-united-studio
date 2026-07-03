@@ -2142,21 +2142,22 @@ button { font-family: inherit; }
 }
 .stem-badge {
   font-family: var(--head);
-  font-size: 0.46rem;
+  font-size: 0.44rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: var(--r-xs);
-  background: rgba(255,255,255,0.07);
-  color: rgba(244,239,230,0.55);
-  border: 1px solid rgba(255,255,255,0.14);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #fff;
+  border: none;
+  line-height: 1;
+  white-space: nowrap;
 }
-.stem-badge.prod   { background: rgba(184,153,104,0.18); border-color: rgba(184,153,104,0.38); color: #c9a97a; }
-.stem-badge.mix    { background: rgba(60,130,190,0.15);  border-color: rgba(60,130,190,0.35);  color: #6ab0e0; }
-.stem-badge.master { background: rgba(45,160,95,0.13);   border-color: rgba(45,160,95,0.35);   color: #5ecf8f; }
-.stem-badge.vocal  { background: rgba(180,140,30,0.15);  border-color: rgba(150,110,20,0.35);  color: #d4ae4a; }
-.stem-badge.arr    { background: rgba(140,80,190,0.12);  border-color: rgba(120,60,170,0.32);  color: #b07ad0; }
+.stem-badge.prod   { background: #c27c2e; }
+.stem-badge.mix    { background: #2e82c2; }
+.stem-badge.master { background: #27a85f; }
+.stem-badge.vocal  { background: #c23a3a; }
+.stem-badge.arr    { background: #7c3fc2; }
 .stem-row-toggle {
   display: flex; align-items: center; gap: 7px; flex-shrink: 0;
 }
@@ -4288,13 +4289,15 @@ footer {
 .port-badges { display: flex; gap: 4px; flex-wrap: wrap; }
 .port-badge {
   font-family: var(--head); font-size: .44rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-  padding: 3px 8px; border-radius: var(--r-xs); border: 1px solid;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 8px; border-radius: 4px; border: none;
+  color: #fff; line-height: 1; white-space: nowrap;
 }
-.port-badge.mix    { background: rgba(60,130,190,.15); border-color: rgba(60,130,190,.35); color: #6ab0e0; }
-.port-badge.master { background: rgba(45,160,95,.13);  border-color: rgba(45,160,95,.35);  color: #5ecf8f; }
-.port-badge.prod   { background: rgba(184,153,104,.18);border-color: rgba(184,153,104,.38);color: #c9a97a; }
-.port-badge.vocal  { background: rgba(180,140,30,.15); border-color: rgba(150,110,20,.35); color: #d4ae4a; }
+.port-badge.mix    { background: #2e82c2; }
+.port-badge.master { background: #27a85f; }
+.port-badge.prod   { background: #c27c2e; }
+.port-badge.vocal  { background: #c23a3a; }
+.port-badge.arr    { background: #7c3fc2; }
 @media (max-width: 1100px) { .port-grid { grid-template-columns: repeat(4, 1fr); } }
 @media (max-width: 768px) {
   #portafolio { padding: 60px 24px; }
