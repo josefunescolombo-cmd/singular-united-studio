@@ -1,0 +1,8 @@
+assets/videos/*.mov
+assets/videos/*.mp4
+.DS_Store
+assets/.DS_Store
+assets/nuevas fotos/.DS_Store
+assets/portfolio/.DS_Store
+assets/audio/.DS_Store
+netlify/.DS_Store

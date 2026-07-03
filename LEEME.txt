@@ -1,0 +1,32 @@
+SINGULAR UNITED STUDIO — Kit web v2
+═════════════════════════════════════════
+
+ARCHIVO PRINCIPAL
+  web-singular-united-studio-v2.html
+  └─ Ábrelo en el navegador o súbelo a tu hosting (Netlify, Hostinger, etc).
+     Todo el CSS y JS van dentro — un solo archivo, sin dependencias.
+
+CARPETA DE ASSETS
+  /assets
+    ├─ Logo + fotos del estudio y productor (ya están todas)
+    ├─ /galeria de fotos    → fotos del carrusel (ya están)
+    ├─ /online              → capturas de pantalla sesiones remotas (ya están)
+    ├─ /videos              ⚠️  AQUÍ tienes que subir 3 videos (ver README dentro)
+    └─ /audio               ⚠️  AQUÍ tienes que subir 6 audios antes/después (ver README dentro)
+
+CÓMO REEMPLAZAR FOTOS
+  Si quieres cambiar una foto concreta, simplemente sustituye el archivo
+  en /assets con el mismo nombre. La web lo cargará automáticamente.
+
+CÓMO DEPLOYAR A INTERNET
+  1. Abre https://app.netlify.com/drop
+  2. Arrastra la CARPETA ENTERA del kit (no solo el HTML)
+  3. Netlify te da una URL pública en 10 segundos. Gratis.
+  4. Si quieres tu dominio (.com), lo conectas desde el panel de Netlify.
+
+CONTACTO Y AJUSTES
+  Si necesitas tocar copy o cambiar nombres de temas/artistas/badges,
+  abre el HTML con cualquier editor de texto y busca lo que quieras
+  cambiar. Está todo en un solo archivo.
+
+— José Funes Studio Kit
