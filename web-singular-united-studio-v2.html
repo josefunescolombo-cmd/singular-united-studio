@@ -2189,10 +2189,10 @@ button { font-family: inherit; }
   background: rgba(255,255,255,0.04);
 }
 .stem-row-bars {
-  display: flex; align-items: center; gap: 2px;
+  display: flex; align-items: center; gap: 1px;
   height: 100%; padding: 6px 0;
 }
-.stem-row-bar { flex: 1; border-radius: 2px; min-width: 2px; transition: background 0.3s; }
+.stem-row-bar { flex: 1; border-radius: 1px; min-width: 1px; max-width: 3px; transition: background 0.3s; }
 .stem-row[data-mode="antes"] .stem-row-bar { background: rgba(244,239,230,0.18); }
 .stem-row[data-mode="antes"] .stem-row-bar.played { background: rgba(244,239,230,0.65); }
 .stem-row[data-mode="despues"] .stem-row-bar { background: rgba(184,153,104,0.35); }
@@ -3757,12 +3757,23 @@ footer {
 }
 @media (max-width: 768px) {
   .svc-band { min-height: 90vh; }
-  .svc-band-name { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+  .svc-band-name { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 10px; }
+  .svc-band-inner { padding: 52px var(--sec-px); }
+  .svc-band-badge { margin-bottom: 14px; }
+  .svc-band-num { margin-bottom: 10px; }
+  .svc-band-tag { margin-bottom: 16px; }
+  .svc-band-desc { font-size: 0.9rem; line-height: 1.65; margin-bottom: 22px; }
+  .svc-includes { gap: 7px; margin-bottom: 20px; }
+  .svc-includes li { font-size: 0.72rem; }
+  .svc-band-footer { gap: 18px; }
+  .svc-band-btn { padding: 13px 28px; font-size: 0.62rem; }
   #intro-band { min-height: 55vh; }
 }
 @media (max-width: 480px) {
   #nav { padding: 10px 20px; }
   .nav-logo img { height: 52px; }
+  .svc-band-inner { padding: 40px 20px; }
+  .svc-band-name { font-size: clamp(1.9rem, 9vw, 2.6rem); }
   .svc-body { padding: 28px 26px 30px; }
   .price-num { font-size: 2.2rem; }
   .prod-stat-num { font-size: 2.2rem; }
@@ -6183,7 +6194,7 @@ footer {
       { title:'Próximamente', artist:'Artista · 2025', genre:'Próximo lanzamiento', cover:'assets/galeria de fotos/IMG_8009.jpg', before:'assets/audio/tema5-antes.mp3', after:'assets/audio/tema5-despues.mp3', badges:[{label:'Grabación',cls:'vocal'},{label:'Master',cls:'master'}], seed:53 }
     ];
 
-    const BAR_COUNT = 80;
+    const BAR_COUNT = 140;
     let activeIdx = null, isPlaying = false;
     let audioCtx = null, analyser = null, dataArray = null, sourceConnected = false;
     const envelopes = {};
