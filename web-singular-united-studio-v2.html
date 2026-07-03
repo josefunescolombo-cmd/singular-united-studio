@@ -3684,8 +3684,13 @@ footer {
   .nav-links::after { display: none; }
   .nav-brand-block { display: none; }
   .nav-burger { display: flex; }
-  .proc-list { grid-template-columns: 1fr; }
-  .proc-card { min-height: 0; }
+  .proc-list { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .proc-card { min-height: 0; padding: 18px 16px 16px; gap: 10px; }
+  .proc-card-n-num { font-size: 1.45rem; }
+  .proc-card-title { font-size: 0.88rem; }
+  .proc-card-desc { font-size: 0.76rem; line-height: 1.6; }
+  .proc-card-hd { padding-bottom: 12px; }
+  .proc-hd { margin-bottom: 36px; }
   .vid-grid { grid-template-columns: 1fr; gap: 32px; max-width: 420px; margin: 0 auto; }
   .nav-links.open {
     display: flex;
@@ -3774,6 +3779,10 @@ footer {
   .nav-logo img { height: 52px; }
   .svc-band-inner { padding: 40px 20px; }
   .svc-band-name { font-size: clamp(1.9rem, 9vw, 2.6rem); }
+  .proc-list { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .proc-card { padding: 14px 13px 13px; }
+  .proc-card-title { font-size: 0.82rem; }
+  .proc-card-desc { font-size: 0.72rem; }
   .svc-body { padding: 28px 26px 30px; }
   .price-num { font-size: 2.2rem; }
   .prod-stat-num { font-size: 2.2rem; }
@@ -5887,10 +5896,17 @@ footer {
   // ════════════════════════════════════════════════════════════
   const heroBg = document.getElementById('heroBg');
   if (heroBg) {
+    let _rafTick = false;
     window.addEventListener('scroll', () => {
-      if (window.scrollY < window.innerHeight) {
-        heroBg.style.transform = `translateY(${window.scrollY * 0.3}px) scale(${1 + window.scrollY * 0.0003})`;
-      }
+      if (_rafTick) return;
+      _rafTick = true;
+      requestAnimationFrame(() => {
+        const sy = window.scrollY;
+        if (sy < window.innerHeight) {
+          heroBg.style.transform = `translateY(${sy * 0.22}px) scale(${1 + sy * 0.00012})`;
+        }
+        _rafTick = false;
+      });
     }, { passive: true });
   }
 
