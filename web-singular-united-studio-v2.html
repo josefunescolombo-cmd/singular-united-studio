@@ -2814,50 +2814,107 @@ input[type="date"].rz-input { color-scheme: dark; }
   display: none;
 }
 
-/* ── CONTACTO ─────────────────────────────────────────────────── */
+/* ── CONTACTO — photo + floating card ──────────────────────────── */
 #contacto {
-  padding: var(--sec-py) var(--sec-px);
+  padding: 0 0 var(--sec-py);
   background: var(--cream);
-  border-top: 1px solid var(--hairline);
+  border-top: none;
+  position: relative;
 }
-.contact-wrap {
-  max-width: 1280px;
+.contact-photo {
+  position: relative;
+  height: 540px;
+  overflow: hidden;
+  background: url('assets/galeria de fotos/_MG_8232.jpg') center 25% / cover no-repeat;
+}
+.contact-photo-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(14,13,11,0.28) 0%, rgba(14,13,11,0.65) 100%);
+}
+.contact-photo-txt {
+  position: absolute;
+  left: var(--sec-px);
+  bottom: 220px;
+  color: var(--cream);
+  max-width: 480px;
+}
+.contact-photo-txt .sec-eye { color: rgba(244,239,230,0.38); display: inline-flex; }
+.contact-photo-txt .sec-eye::before { background: rgba(244,239,230,0.3); }
+.contact-photo-txt .sec-h2 { color: var(--cream); font-size: clamp(1.8rem, 3.2vw, 3.2rem); margin-top: 8px; }
+.contact-photo-txt .sec-h2 .dim { color: rgba(244,239,230,0.4); display: inline; }
+.contact-card-wrap {
+  position: relative;
+  z-index: 2;
+  margin-top: -210px;
+  padding: 0 var(--sec-px);
+}
+.contact-card {
+  background: var(--cream-soft);
+  border-radius: 20px;
+  box-shadow: 0 32px 100px rgba(14,13,11,0.20), 0 4px 20px rgba(14,13,11,0.08);
+  max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 96px;
+  grid-template-columns: 0.75fr 1.4fr;
+  overflow: hidden;
 }
-.c-info .sec-h2 { margin-bottom: 52px; }
+.contact-card-info {
+  background: var(--ink);
+  color: var(--cream);
+  padding: 52px 44px;
+  display: flex;
+  flex-direction: column;
+}
+.contact-card-info .sec-eye { color: rgba(244,239,230,0.32); display: inline-flex; margin-bottom: 18px; }
+.contact-card-info .sec-eye::before { background: var(--bronze); }
+.contact-card-info-title {
+  font-family: var(--head);
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--cream);
+  margin-bottom: 36px;
+}
+.contact-card-info-title em { font-style: normal; color: var(--bronze); }
+.c-info .sec-h2 { margin-bottom: 52px; }  /* legacy */
 .c-item { margin-bottom: 28px; }
 .c-lbl {
   font-family: var(--head);
-  font-size: 0.58rem;
+  font-size: 0.56rem;
   font-weight: 700;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
+  color: rgba(244,239,230,0.32);
+  margin-bottom: 6px;
   display: block;
 }
 .c-val {
   font-family: var(--body);
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 400;
+  color: rgba(244,239,230,0.68);
 }
-.c-val a { transition: color 0.2s; }
-.c-val a:hover { color: var(--bronze-2); }
+.c-val a { color: rgba(244,239,230,0.68); transition: color 0.2s; }
+.c-val a:hover { color: var(--bronze); }
+.contact-card-form-wrap {
+  padding: 52px;
+  background: var(--cream-soft);
+}
 .c-social {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: var(--body);
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 400;
-  color: var(--muted);
-  margin-top: 32px;
+  color: rgba(244,239,230,0.35);
+  margin-top: auto;
+  padding-top: 32px;
   transition: color 0.2s;
 }
-.c-social:hover { color: var(--ink); }
+.c-social:hover { color: var(--bronze); }
 
 .c-form { display: grid; gap: 18px; }
 .f-group { display: flex; flex-direction: column; gap: 8px; }
@@ -3695,7 +3752,7 @@ footer {
   .est-slide-veil { background: linear-gradient(to bottom, rgba(14,13,11,0.15) 0%, rgba(14,13,11,0.82) 48%, rgba(14,13,11,1) 100%); }
   .est-slide-content { right: 0; left: 0; width: 100%; padding: 36px 28px 72px; justify-content: flex-end; }
   .est-nav { right: 28px; }
-  .contact-wrap { grid-template-columns: 1fr; gap: 56px; }
+  /* contact-wrap legacy — replaced by contact-card */
   .prod-main { grid-template-columns: 1fr; gap: 56px; }
   .prod-stats-row { grid-template-columns: 1fr; }
   .prod-stat-item { border-right: none; border-bottom: 1px solid var(--hairline-d); padding: 24px clamp(20px,4vw,40px); }
@@ -4592,6 +4649,36 @@ footer {
 @media (max-width: 600px) {
   .blog-grid { grid-template-columns: 1fr; }
   .blog-hd { margin-bottom: 36px; }
+}
+
+/* ── TESTIMONIOS & VIDEO — títulos compactos en una línea ────── */
+#testimonios .sec-h2,
+#video-testimonios .sec-h2 {
+  font-size: clamp(1.4rem, 2.4vw, 2.2rem) !important;
+}
+#testimonios .sec-h2 .dim,
+#video-testimonios .sec-h2 .dim {
+  display: inline !important;
+  white-space: normal;
+}
+.test-hd { max-width: 900px; margin-bottom: 40px; }
+.vid-hd { margin-bottom: 40px; }
+.vid-hd > p { margin-top: 12px; font-size: 0.9rem; }
+
+/* ── CONTACTO RESPONSIVE ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .contact-card { grid-template-columns: 1fr 1.2fr; }
+  .contact-card-info { padding: 44px 36px; }
+  .contact-card-form-wrap { padding: 44px 36px; }
+}
+@media (max-width: 768px) {
+  .contact-photo { height: 380px; }
+  .contact-photo-txt { bottom: 160px; }
+  .contact-card-wrap { margin-top: -140px; padding: 0 20px; }
+  .contact-card { grid-template-columns: 1fr; border-radius: 14px; }
+  .contact-card-info { padding: 36px 28px; }
+  .contact-card-form-wrap { padding: 36px 28px; }
+  .contact-card-info-title { font-size: 1.4rem; margin-bottom: 24px; }
 }
 
 </style>
@@ -6045,59 +6132,70 @@ footer {
 
   <!-- ══ CONTACTO ══ -->
   <section id="contacto">
-    <div class="contact-wrap">
-      <div class="c-info rev-l">
+    <div class="contact-photo">
+      <div class="contact-photo-veil"></div>
+      <div class="contact-photo-txt">
         <p class="sec-eye">Hablemos</p>
-        <h2 class="sec-h2">Tu proyecto<span class="dim">empieza aquí</span></h2>
-        <div class="c-item">
-          <span class="c-lbl">Email</span>
-          <div class="c-val"><a href="mailto:snglrstudiodenia@gmail.com">snglrstudiodenia@gmail.com</a></div>
-        </div>
-        <div class="c-item">
-          <span class="c-lbl">Teléfono</span>
-          <div class="c-val"><a href="tel:+34615408155">+34 615 408 155</a></div>
-        </div>
-        <div class="c-item">
-          <span class="c-lbl">Ubicación</span>
-          <div class="c-val">Dénia, Alicante · España</div>
-        </div>
-        <a href="https://www.instagram.com/singular_estudios" target="_blank" rel="noopener" class="c-social">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          @singular_estudios
-        </a>
+        <h2 class="sec-h2">Tu proyecto<span class="dim"> empieza aquí</span></h2>
       </div>
-      <form class="c-form rev-r" name="contacto" method="POST" data-netlify="true" onsubmit="sendForm(event)">
-        <input type="hidden" name="form-name" value="contacto">
-        <div class="f-group">
-          <label class="f-lbl">Nombre</label>
-          <input type="text" name="nombre" class="f-input" placeholder="Tu nombre" required>
+    </div>
+    <div class="contact-card-wrap">
+      <div class="contact-card">
+        <div class="contact-card-info">
+          <p class="sec-eye">Singular United Studio</p>
+          <h3 class="contact-card-info-title">Tu canción<br>en manos<br><em>expertas.</em></h3>
+          <div class="c-item">
+            <span class="c-lbl">Email</span>
+            <div class="c-val"><a href="mailto:snglrstudiodenia@gmail.com">snglrstudiodenia@gmail.com</a></div>
+          </div>
+          <div class="c-item">
+            <span class="c-lbl">Teléfono</span>
+            <div class="c-val"><a href="tel:+34615408155">+34 615 408 155</a></div>
+          </div>
+          <div class="c-item">
+            <span class="c-lbl">Ubicación</span>
+            <div class="c-val">Dénia, Alicante · España</div>
+          </div>
+          <a href="https://www.instagram.com/singular_estudios" target="_blank" rel="noopener" class="c-social">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            @singular_estudios
+          </a>
         </div>
-        <div class="f-group">
-          <label class="f-lbl">Email</label>
-          <input type="email" name="email" class="f-input" placeholder="tu@email.com" required>
+        <div class="contact-card-form-wrap">
+          <form class="c-form" name="contacto" method="POST" data-netlify="true" onsubmit="sendForm(event)">
+            <input type="hidden" name="form-name" value="contacto">
+            <div class="f-group">
+              <label class="f-lbl">Nombre</label>
+              <input type="text" name="nombre" class="f-input" placeholder="Tu nombre" required>
+            </div>
+            <div class="f-group">
+              <label class="f-lbl">Email</label>
+              <input type="email" name="email" class="f-input" placeholder="tu@email.com" required>
+            </div>
+            <div class="f-group">
+              <label class="f-lbl">Servicio</label>
+              <select name="servicio" class="f-select">
+                <option value="">¿Qué servicio te interesa?</option>
+                <option>Origen — Producción Musical (desde 170€)</option>
+                <option>La Toma — Grabación Vocal (desde 90€)</option>
+                <option>Mix Elevation — Mezcla (desde 120€)</option>
+                <option>Master Ready — Masterización (40€)</option>
+                <option>Desarrollo Artístico · desde 150€</option>
+                <option>Pack Básico (grab + mezcla + máster) · 250€</option>
+                <option>Pack Pro (prod + grab + mezcla + máster) · 400€</option>
+                <option>Pack Premium (preprod + prod + grab + mezcla + máster) · 600€</option>
+                <option>Pack Visionario (desarrollo + prod + dirección) · 750€</option>
+                <option>Otro / Consulta general</option>
+              </select>
+            </div>
+            <div class="f-group">
+              <label class="f-lbl">Cuéntame tu proyecto</label>
+              <textarea name="mensaje" class="f-ta" placeholder="Descríbeme qué tienes en mente..."></textarea>
+            </div>
+            <button type="submit" class="f-submit" id="fBtn">Enviar mensaje <span>→</span></button>
+          </form>
         </div>
-        <div class="f-group">
-          <label class="f-lbl">Servicio</label>
-          <select name="servicio" class="f-select">
-            <option value="">¿Qué servicio te interesa?</option>
-            <option>Origen — Producción Musical (desde 170€)</option>
-            <option>La Toma — Grabación Vocal (desde 90€)</option>
-            <option>Mix Elevation — Mezcla (desde 120€)</option>
-            <option>Master Ready — Masterización (40€)</option>
-            <option>Desarrollo Artístico · desde 150€</option>
-            <option>Pack Básico (grab + mezcla + máster) · 250€</option>
-            <option>Pack Pro (prod + grab + mezcla + máster) · 400€</option>
-            <option>Pack Premium (preprod + prod + grab + mezcla + máster) · 600€</option>
-            <option>Pack Visionario (desarrollo + prod + dirección) · 750€</option>
-            <option>Otro / Consulta general</option>
-          </select>
-        </div>
-        <div class="f-group">
-          <label class="f-lbl">Cuéntame tu proyecto</label>
-          <textarea name="mensaje" class="f-ta" placeholder="Descríbeme qué tienes en mente..."></textarea>
-        </div>
-        <button type="submit" class="f-submit" id="fBtn">Enviar mensaje <span>→</span></button>
-      </form>
+      </div>
     </div>
   </section>
 
