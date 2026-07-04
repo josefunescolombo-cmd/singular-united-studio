@@ -2422,19 +2422,36 @@ button { font-family: inherit; }
 
 /* ── FAQ ──────────────────────────────────────────────────────── */
 #faq {
-  padding: var(--sec-py) var(--sec-px);
+  padding: clamp(36px, 4.5vw, 56px) var(--sec-px);
   background: var(--cream);
   border-top: 1px solid var(--hairline);
 }
 .faq-wrap {
-  display: grid;
-  grid-template-columns: 0.9fr 1.4fr;
-  gap: 100px;
-  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 1100px;
   margin: 0 auto;
 }
+.faq-side {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+.faq-side > div:first-child { flex: 1; min-width: 200px; }
+.faq-side .sec-eye { margin-bottom: 6px; }
+.faq-side .sec-h2 {
+  font-size: clamp(1.1rem, 1.9vw, 1.5rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+}
 .faq-side .faq-help {
-  margin-top: 32px;
+  margin-top: 0;
+  flex-shrink: 0;
+  max-width: 280px;
   padding: 28px;
   border: 1px solid var(--hairline);
   border-radius: var(--r-md);
@@ -2478,7 +2495,7 @@ button { font-family: inherit; }
 }
 .faq-help a:hover { gap: 14px; }
 
-.faq-list { display: flex; flex-direction: column; }
+.faq-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 52px; }
 .faq-item {
   border-bottom: 1px solid var(--hairline);
   opacity: 0;
@@ -2494,7 +2511,7 @@ button { font-family: inherit; }
   width: 100%;
   background: none;
   border: none;
-  padding: 32px 0;
+  padding: 15px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2505,16 +2522,16 @@ button { font-family: inherit; }
 }
 .faq-q-text {
   font-family: var(--head);
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  letter-spacing: -0.015em;
-  line-height: 1.35;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
   flex: 1;
   transition: color 0.3s;
 }
 .faq-item:hover .faq-q-text { color: var(--accent); }
 .faq-toggle {
-  width: 40px; height: 40px;
+  width: 30px; height: 30px;
   border-radius: 50%;
   border: 1px solid var(--hairline);
   display: flex;
@@ -2534,8 +2551,8 @@ button { font-family: inherit; }
   background: var(--ink);
   transition: background 0.3s, transform 0.4s var(--ease-out);
 }
-.faq-toggle::before { width: 14px; height: 1.5px; }
-.faq-toggle::after  { width: 1.5px; height: 14px; }
+.faq-toggle::before { width: 11px; height: 1.5px; }
+.faq-toggle::after  { width: 1.5px; height: 11px; }
 .faq-item:hover .faq-toggle::before,
 .faq-item:hover .faq-toggle::after {
   background: var(--cream);
@@ -3692,7 +3709,9 @@ footer {
   .ol-step-h { border-right: none; border-bottom: 1px solid var(--hairline); }
   .ol-step-h:last-child { border-bottom: none; }
   .online-grid { grid-template-columns: 1fr; }
-  .faq-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .faq-side { flex-direction: column; align-items: flex-start; }
+  .faq-side .faq-help { max-width: 100%; margin-left: 0; }
+  .faq-list { grid-template-columns: 1fr; }
   .stem-layout { grid-template-columns: 1fr; gap: 56px; }
   .stem-text { padding-right: 0; }
   .stem-player-wrap { padding: 0 20px; }
@@ -3763,7 +3782,7 @@ footer {
   .tienda-layout { grid-template-columns: 1fr; padding: 56px var(--sec-px); }
   .tienda-text { padding-right: 0; padding-bottom: 32px; }
   .tienda-rail-wrap { padding: 0 var(--sec-px); }
-  .faq-q-text { font-size: 1.05rem; }
+  .faq-q-text { font-size: 0.88rem; }
   .test-card { padding: 32px 28px; }
   .rz-services { grid-template-columns: 1fr; }
   .rz-step-label { display: none; }
@@ -5769,8 +5788,10 @@ footer {
   <section id="faq">
     <div class="faq-wrap">
       <div class="faq-side rev-l">
-        <p class="sec-eye">Preguntas frecuentes</p>
-        <h2 class="sec-h2">Resolvemos<span class="dim">tus dudas</span></h2>
+        <div>
+          <p class="sec-eye">Preguntas frecuentes</p>
+          <h2 class="sec-h2">Resolvemos<span class="dim"> tus dudas</span></h2>
+        </div>
         <div class="faq-help">
           <div class="faq-help-eye">¿No encuentras tu respuesta?</div>
           <h4>Escríbenos directamente</h4>
