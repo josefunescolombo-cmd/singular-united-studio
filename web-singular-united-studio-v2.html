@@ -3947,33 +3947,144 @@ footer {
 
 /* ══ DIAGNÓSTICO ══ (reescrito) */
 #diagnostico {
+  padding: 0 0 var(--sec-py);
   background: var(--cream);
-  padding: 110px var(--sec-px);
-  text-align: center;
+  position: relative;
+}
+.diag-photo {
+  height: 540px;
   position: relative;
   overflow: hidden;
+  background: url('assets/sesion vocalpost.jpg') center 30% / cover no-repeat;
 }
-#diagnostico::before {
-  content: '';
+.diag-photo-veil {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 130%, rgba(184,153,104,0.1) 0%, transparent 65%);
-  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(14,13,11,0.22) 0%, rgba(14,13,11,0.62) 100%);
 }
-.diag-intro { max-width: 620px; margin: 0 auto; }
-.diag-intro .sec-h2 { color: var(--ink); margin-bottom: 20px; }
-.diag-intro-desc {
-  font-family: var(--body); font-size: 1.05rem;
-  color: var(--muted); line-height: 1.8; margin-bottom: 52px;
+.diag-scene-wrap {
+  position: relative;
+  z-index: 2;
+  margin-top: -210px;
+  padding: 0 var(--sec-px);
+}
+.diag-scene-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 32px 100px rgba(14,13,11,0.22), 0 4px 20px rgba(14,13,11,0.08);
+}
+.diag-scene-left {
+  background: var(--ink);
+  padding: 56px 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.diag-scene-eyebrow {
+  font-family: var(--head);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.diag-scene-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--bronze);
+  flex-shrink: 0;
+}
+.diag-scene-h {
+  font-family: var(--head);
+  font-size: clamp(1.9rem, 3.2vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--cream);
+}
+.diag-scene-h em { font-style: normal; color: var(--bronze); }
+.diag-scene-body {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: rgba(244,239,230,0.5);
+  max-width: 380px;
+}
+.diag-scene-right {
+  background: var(--cream-soft);
+  padding: 52px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+.diag-scene-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(184,153,104,0.12);
+  border: 1px solid rgba(184,153,104,0.28);
+  border-radius: var(--r-pill);
+  padding: 7px 16px;
+  font-family: var(--head);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  width: fit-content;
+}
+.diag-scene-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.diag-scene-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.diag-scene-check-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(184,153,104,0.14);
+  border: 1px solid rgba(184,153,104,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+  color: var(--bronze);
+  margin-top: 1px;
+}
+.diag-scene-time {
+  font-size: 0.74rem;
+  color: var(--muted-2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .diag-start-btn {
-  display: inline-flex; align-items: center; gap: 16px;
-  padding: 20px 44px;
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 17px 36px;
   background: var(--ink); color: var(--cream);
-  font-family: var(--head); font-size: 0.68rem; font-weight: 700;
+  font-family: var(--head); font-size: 0.66rem; font-weight: 700;
   letter-spacing: 0.14em; text-transform: uppercase;
   border: none; border-radius: var(--r-pill);
   cursor: pointer; transition: background 0.28s, transform 0.28s;
+  width: 100%;
+  justify-content: center;
 }
 .diag-start-btn:hover { background: var(--bronze); transform: scale(1.02); }
 .diag-btn-arrow {
@@ -4679,6 +4790,21 @@ footer {
   .contact-card-info { padding: 36px 28px; }
   .contact-card-form-wrap { padding: 36px 28px; }
   .contact-card-info-title { font-size: 1.4rem; margin-bottom: 24px; }
+}
+
+/* ── DIAGNÓSTICO RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .diag-scene-card { grid-template-columns: 1fr; }
+  .diag-scene-left { padding: 48px 40px 40px; }
+  .diag-scene-right { padding: 40px; }
+  .diag-scene-wrap { margin-top: -160px; }
+}
+@media (max-width: 768px) {
+  .diag-photo { height: 380px; }
+  .diag-scene-wrap { margin-top: -120px; padding: 0 20px; }
+  .diag-scene-left { padding: 36px 28px; }
+  .diag-scene-right { padding: 32px 28px; }
+  .diag-scene-card { border-radius: 14px; }
 }
 
 </style>
@@ -5627,14 +5753,43 @@ footer {
 
   <!-- ══ DIAGNÓSTICO ══ -->
   <section id="diagnostico">
-    <div class="diag-intro rev-up">
-      <p class="sec-eye">¿Qué necesita tu canción?</p>
-      <h2 class="sec-h2">El diagnóstico<span class="dim">gratuito</span></h2>
-      <p class="diag-intro-desc">Responde 8 preguntas y descubre exactamente en qué punto está tu canción. Aquí no guiamos a todo el mundo — primero necesitamos entender dónde estás para saber cómo llevarte donde quieres llegar.</p>
-      <button class="diag-start-btn" id="diagStartBtn">
-        Empezar el diagnóstico
-        <span class="diag-btn-arrow">→</span>
-      </button>
+    <div class="diag-photo">
+      <div class="diag-photo-veil"></div>
+    </div>
+    <div class="diag-scene-wrap">
+      <div class="diag-scene-card">
+
+        <!-- Izquierda: editorial -->
+        <div class="diag-scene-left">
+          <p class="diag-scene-eyebrow">Singular United Studio</p>
+          <h2 class="diag-scene-h">¿Qué necesita<br><em>tu canción?</em></h2>
+          <p class="diag-scene-body">Antes de reservar, descubre en qué punto exacto está tu música y qué proceso necesita para sonar como merece. No adivinamos — diagnosticamos.</p>
+        </div>
+
+        <!-- Derecha: card trigger -->
+        <div class="diag-scene-right">
+          <span class="diag-scene-tag">Diagnóstico gratuito · 8 preguntas</span>
+          <div class="diag-scene-checks">
+            <div class="diag-scene-check">
+              <span class="diag-scene-check-icon">✓</span>
+              Identifica qué fase necesita tu canción: grabación, mezcla o máster
+            </div>
+            <div class="diag-scene-check">
+              <span class="diag-scene-check-icon">✓</span>
+              Detecta errores comunes antes de entrar a estudio
+            </div>
+            <div class="diag-scene-check">
+              <span class="diag-scene-check-icon">✓</span>
+              Recibe recomendaciones personalizadas al instante
+            </div>
+          </div>
+          <p class="diag-scene-time">⏱ Solo 3 minutos · Sin registro</p>
+          <button class="diag-start-btn" id="diagStartBtn">
+            Empezar el diagnóstico →
+          </button>
+        </div>
+
+      </div>
     </div>
   </section>
 
