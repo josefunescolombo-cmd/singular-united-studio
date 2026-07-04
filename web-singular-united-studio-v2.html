@@ -763,6 +763,8 @@ button { font-family: inherit; }
   display: flex;
   align-items: center;
   overflow: hidden;
+  border-radius: clamp(16px, 2vw, 28px);
+  margin: 0 clamp(20px, 3.5vw, 56px) 20px;
 }
 .svc-band-bg {
   position: absolute;
@@ -4878,54 +4880,101 @@ footer {
   margin-top: 16px;
   line-height: 1.72;
 }
-.precios-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  max-width: 1160px;
-  margin: 0 auto 52px;
-  align-items: start;
-}
-.precio-card {
-  background: rgba(244,239,230,0.03);
-  border: 1px solid rgba(244,239,230,0.07);
-  border-radius: 18px;
-  padding: 32px 24px 36px;
+
+/* filas de precio */
+.precios-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  position: relative;
-  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+  gap: 16px;
+  max-width: 1100px;
+  margin: 0 auto 56px;
 }
-.precio-card:hover {
-  background: rgba(244,239,230,0.06);
-  border-color: rgba(244,239,230,0.14);
-  transform: translateY(-4px);
+.prx-row {
+  display: grid;
+  grid-template-columns: 1fr 178px;
+  gap: 16px;
+  align-items: center;
 }
-.precio-card.featured {
-  background: rgba(184,153,104,0.09);
-  border-color: rgba(184,153,104,0.32);
+.prx-row.prx-flip {
+  grid-template-columns: 178px 1fr;
 }
-.precio-card.featured:hover {
-  background: rgba(184,153,104,0.14);
-  border-color: rgba(184,153,104,0.5);
+.prx-row.prx-flip .prx-info { order: 2; }
+.prx-row.prx-flip .prx-tag  { order: 1; }
+
+/* panel de info del servicio */
+.prx-info {
+  background: rgba(244,239,230,0.04);
+  border: 1px solid rgba(244,239,230,0.08);
+  border-radius: 18px;
+  padding: 32px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.3s, background 0.3s;
 }
-.precio-tag {
-  position: absolute;
-  top: -13px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bronze);
-  color: var(--ink);
+.prx-info:hover {
+  background: rgba(244,239,230,0.065);
+  border-color: rgba(244,239,230,0.13);
+}
+.prx-row.prx-flip.featured .prx-info {
+  background: rgba(184,153,104,0.07);
+  border-color: rgba(184,153,104,0.22);
+}
+
+/* etiqueta de precio flotante */
+.prx-tag {
+  background: var(--cream-soft);
+  border-radius: 18px;
+  padding: 28px 22px;
+  box-shadow: 0 28px 64px rgba(0,0,0,0.36), 0 8px 22px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  flex-shrink: 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.prx-tag:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 36px 80px rgba(0,0,0,0.4), 0 10px 28px rgba(0,0,0,0.22);
+}
+.prx-tag-lbl {
   font-family: var(--head);
   font-size: 0.48rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 100px;
-  white-space: nowrap;
+  color: var(--muted);
 }
+.prx-tag-num {
+  font-family: var(--head);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.prx-tag.featured .prx-tag-num { color: var(--bronze); }
+.prx-tag-unit {
+  font-size: 0.66rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.prx-tag-pop {
+  background: var(--bronze);
+  color: var(--ink);
+  font-family: var(--head);
+  font-size: 0.44rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-top: 4px;
+}
+
+/* contenido del panel */
 .precio-eyebrow {
   font-family: var(--head);
   font-size: 0.52rem;
@@ -4936,52 +4985,24 @@ footer {
 }
 .precio-name {
   font-family: var(--head);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
   color: var(--cream);
   letter-spacing: -0.01em;
-  line-height: 1.25;
-  margin-top: -8px;
-}
-.precio-amount {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(244,239,230,0.07);
-}
-.precio-desde-lbl {
-  font-family: var(--head);
-  font-size: 0.5rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(244,239,230,0.28);
-}
-.precio-num {
-  font-family: var(--head);
-  font-size: clamp(2rem, 2.8vw, 2.6rem);
-  font-weight: 800;
-  color: var(--cream);
-  letter-spacing: -0.04em;
-  line-height: 1;
-}
-.precio-card.featured .precio-num { color: var(--bronze); }
-.precio-por {
-  font-size: 0.74rem;
-  color: rgba(244,239,230,0.3);
-  line-height: 1.4;
+  line-height: 1.2;
 }
 .precio-includes {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(244,239,230,0.07);
 }
 .precio-inc {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 0.77rem;
+  font-size: 0.78rem;
   color: rgba(244,239,230,0.45);
   line-height: 1.5;
 }
@@ -4994,8 +5015,9 @@ footer {
   flex-shrink: 0;
   margin-top: 6px;
 }
-.precio-card.featured .precio-inc { color: rgba(244,239,230,0.62); }
-.precio-card.featured .precio-inc-dot { opacity: 1; }
+.prx-row.featured .precio-inc { color: rgba(244,239,230,0.62); }
+.prx-row.featured .precio-inc-dot { opacity: 1; }
+
 .precios-footer {
   text-align: center;
   max-width: 500px;
@@ -5009,12 +5031,14 @@ footer {
 .precios-footer-txt strong { color: rgba(244,239,230,0.55); }
 .precios-footer-txt a { color: var(--bronze); text-decoration: none; }
 .precios-footer-txt a:hover { text-decoration: underline; }
-@media (max-width: 1024px) {
-  .precios-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 580px) {
-  .precios-grid { grid-template-columns: 1fr; }
-  .precios-hd { margin-bottom: 44px; }
+
+@media (max-width: 768px) {
+  .prx-row,
+  .prx-row.prx-flip { grid-template-columns: 1fr; }
+  .prx-row.prx-flip .prx-info { order: 1; }
+  .prx-row.prx-flip .prx-tag  { order: 2; }
+  .prx-tag { flex-direction: row; justify-content: center; gap: 20px; padding: 20px 28px; border-radius: 14px; }
+  .prx-tag-unit { text-align: left; }
 }
 
 </style>
@@ -5990,67 +6014,79 @@ footer {
       <h2 class="sec-h2">Tarifas<span class="dim"> de referencia</span></h2>
       <p class="precios-hd-sub">Precios orientativos. Cada proyecto es diferente — escríbenos para un presupuesto a medida.</p>
     </div>
-    <div class="precios-grid">
+    <div class="precios-list">
 
-      <div class="precio-card rev-up">
-        <p class="precio-eyebrow">Grabación</p>
-        <p class="precio-name">Grabación vocal</p>
-        <div class="precio-amount">
-          <span class="precio-desde-lbl">Desde</span>
-          <span class="precio-num">45€</span>
-          <span class="precio-por">por hora · mínimo 2 horas</span>
+      <!-- Fila 1: info izquierda, etiqueta derecha -->
+      <div class="prx-row rev-up">
+        <div class="prx-info">
+          <p class="precio-eyebrow">Grabación</p>
+          <p class="precio-name">Grabación vocal</p>
+          <div class="precio-includes">
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Sala acondicionada profesionalmente</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Técnico de grabación incluido</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Archivo WAV 24bit / 48kHz</div>
+          </div>
         </div>
-        <div class="precio-includes">
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Sala acondicionada profesionalmente</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Técnico de grabación incluido</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Archivo WAV 24bit / 48kHz</div>
+        <div class="prx-tag">
+          <span class="prx-tag-lbl">Desde</span>
+          <span class="prx-tag-num">45€</span>
+          <span class="prx-tag-unit">por hora<br>mín. 2 horas</span>
         </div>
       </div>
 
-      <div class="precio-card rev-up">
-        <p class="precio-eyebrow">Mezcla</p>
-        <p class="precio-name">Mezcla profesional</p>
-        <div class="precio-amount">
-          <span class="precio-desde-lbl">Desde</span>
-          <span class="precio-num">120€</span>
-          <span class="precio-por">por canción</span>
+      <!-- Fila 2: etiqueta izquierda, info derecha -->
+      <div class="prx-row prx-flip rev-up">
+        <div class="prx-info">
+          <p class="precio-eyebrow">Mezcla</p>
+          <p class="precio-name">Mezcla profesional</p>
+          <div class="precio-includes">
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Hasta 2 revisiones incluidas</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Stem mix disponible</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Entrega en 5–7 días hábiles</div>
+          </div>
         </div>
-        <div class="precio-includes">
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Hasta 2 revisiones incluidas</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Stem mix disponible</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Entrega en 5–7 días hábiles</div>
-        </div>
-      </div>
-
-      <div class="precio-card featured rev-up">
-        <span class="precio-tag">Más popular</span>
-        <p class="precio-eyebrow">Pack completo</p>
-        <p class="precio-name">Grabación + Mezcla + Master</p>
-        <div class="precio-amount">
-          <span class="precio-desde-lbl">Desde</span>
-          <span class="precio-num">280€</span>
-          <span class="precio-por">por canción · todo incluido</span>
-        </div>
-        <div class="precio-includes">
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Sesión de grabación (2 horas)</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Mezcla profesional</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Masterización incluida</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>3 revisiones en total</div>
+        <div class="prx-tag">
+          <span class="prx-tag-lbl">Desde</span>
+          <span class="prx-tag-num">120€</span>
+          <span class="prx-tag-unit">por canción</span>
         </div>
       </div>
 
-      <div class="precio-card rev-up">
-        <p class="precio-eyebrow">Masterización</p>
-        <p class="precio-name">Masterización online</p>
-        <div class="precio-amount">
-          <span class="precio-desde-lbl">Desde</span>
-          <span class="precio-num">55€</span>
-          <span class="precio-por">por canción</span>
+      <!-- Fila 3: info izquierda, etiqueta derecha (destacado) -->
+      <div class="prx-row featured rev-up">
+        <div class="prx-info">
+          <p class="precio-eyebrow">Pack completo</p>
+          <p class="precio-name">Grabación + Mezcla + Master</p>
+          <div class="precio-includes">
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Sesión de grabación (2 horas)</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Mezcla profesional</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Masterización incluida</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>3 revisiones en total</div>
+          </div>
         </div>
-        <div class="precio-includes">
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Optimizado para streaming</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>Versión radio y álbum</div>
-          <div class="precio-inc"><span class="precio-inc-dot"></span>1 revisión incluida</div>
+        <div class="prx-tag featured">
+          <span class="prx-tag-lbl">Desde</span>
+          <span class="prx-tag-num">280€</span>
+          <span class="prx-tag-unit">por canción<br>todo incluido</span>
+          <span class="prx-tag-pop">Más popular</span>
+        </div>
+      </div>
+
+      <!-- Fila 4: etiqueta izquierda, info derecha -->
+      <div class="prx-row prx-flip rev-up">
+        <div class="prx-info">
+          <p class="precio-eyebrow">Masterización</p>
+          <p class="precio-name">Masterización online</p>
+          <div class="precio-includes">
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Optimizado para streaming</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>Versión radio y álbum</div>
+            <div class="precio-inc"><span class="precio-inc-dot"></span>1 revisión incluida</div>
+          </div>
+        </div>
+        <div class="prx-tag">
+          <span class="prx-tag-lbl">Desde</span>
+          <span class="prx-tag-num">55€</span>
+          <span class="prx-tag-unit">por canción</span>
         </div>
       </div>
 
