@@ -4809,6 +4809,72 @@ footer {
   .diag-scene-card { border-radius: 14px; }
 }
 
+/* ── PRICE TAG dentro de svc-band ───────────────────────────── */
+.svc-band-price-tag {
+  position: absolute;
+  z-index: 4;
+  background: var(--cream-soft);
+  border-radius: 18px;
+  padding: 24px 22px;
+  box-shadow: 0 28px 64px rgba(0,0,0,0.42), 0 8px 24px rgba(0,0,0,0.24);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+  min-width: 148px;
+  bottom: clamp(48px, 8vh, 88px);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.svc-band:hover .svc-band-price-tag {
+  transform: translateY(-4px);
+  box-shadow: 0 36px 80px rgba(0,0,0,0.46), 0 10px 28px rgba(0,0,0,0.26);
+}
+.svc-band--l .svc-band-price-tag { right: clamp(32px, 6vw, 96px); }
+.svc-band--r .svc-band-price-tag { left: clamp(32px, 6vw, 96px); }
+.svc-band-pt-lbl {
+  font-family: var(--head);
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.svc-band-pt-num {
+  font-family: var(--head);
+  font-size: clamp(1.9rem, 2.8vw, 2.5rem);
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.svc-band-pt-unit {
+  font-size: 0.64rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.svc-band-pt-badge {
+  background: var(--bronze);
+  color: var(--ink);
+  font-family: var(--head);
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-top: 5px;
+}
+@media (max-width: 768px) {
+  .svc-band-price-tag {
+    bottom: 20px;
+    min-width: 118px;
+    padding: 16px 16px;
+  }
+  .svc-band--r .svc-band-price-tag { left: 20px; }
+  .svc-band--l .svc-band-price-tag { right: 20px; }
+}
+
 /* ── STATS STRIP ──────────────────────────────────────────────── */
 .stats-strip {
   background: var(--cream-2);
@@ -5067,7 +5133,6 @@ footer {
       <li><a href="#stem">Escucha</a></li>
       <li><a href="#testimonios">Clientes</a></li>
       <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#precios">Precios</a></li>
       <li><a href="#tienda">Tienda</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#reserva" class="nav-cta">Reservar</a></li>
@@ -5932,6 +5997,11 @@ footer {
         </div>
       </div>
     </div>
+    <div class="svc-band-price-tag">
+      <span class="svc-band-pt-lbl">Desde</span>
+      <span class="svc-band-pt-num">350€</span>
+      <span class="svc-band-pt-unit">por canción</span>
+    </div>
   </section>
 
   <!-- Banda 02 — Grabación Vocal -->
@@ -5955,6 +6025,11 @@ footer {
           <a href="#reserva" class="svc-band-btn">Cuéntame tu proyecto →</a>
         </div>
       </div>
+    </div>
+    <div class="svc-band-price-tag">
+      <span class="svc-band-pt-lbl">Desde</span>
+      <span class="svc-band-pt-num">45€</span>
+      <span class="svc-band-pt-unit">por hora · mín. 2h</span>
     </div>
   </section>
 
@@ -5981,6 +6056,12 @@ footer {
         </div>
       </div>
     </div>
+    <div class="svc-band-price-tag">
+      <span class="svc-band-pt-lbl">Desde</span>
+      <span class="svc-band-pt-num">120€</span>
+      <span class="svc-band-pt-unit">por canción</span>
+      <span class="svc-band-pt-badge">Más popular</span>
+    </div>
   </section>
 
   <!-- Banda 04 — Masterización -->
@@ -6005,94 +6086,10 @@ footer {
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- ══ PRECIOS ══ -->
-  <section id="precios">
-    <div class="precios-hd rev-up">
-      <p class="sec-eye">Inversión en tu música</p>
-      <h2 class="sec-h2">Tarifas<span class="dim"> de referencia</span></h2>
-      <p class="precios-hd-sub">Precios orientativos. Cada proyecto es diferente — escríbenos para un presupuesto a medida.</p>
-    </div>
-    <div class="precios-list">
-
-      <!-- Fila 1: info izquierda, etiqueta derecha -->
-      <div class="prx-row rev-up">
-        <div class="prx-info">
-          <p class="precio-eyebrow">Grabación</p>
-          <p class="precio-name">Grabación vocal</p>
-          <div class="precio-includes">
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Sala acondicionada profesionalmente</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Técnico de grabación incluido</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Archivo WAV 24bit / 48kHz</div>
-          </div>
-        </div>
-        <div class="prx-tag">
-          <span class="prx-tag-lbl">Desde</span>
-          <span class="prx-tag-num">45€</span>
-          <span class="prx-tag-unit">por hora<br>mín. 2 horas</span>
-        </div>
-      </div>
-
-      <!-- Fila 2: etiqueta izquierda, info derecha -->
-      <div class="prx-row prx-flip rev-up">
-        <div class="prx-info">
-          <p class="precio-eyebrow">Mezcla</p>
-          <p class="precio-name">Mezcla profesional</p>
-          <div class="precio-includes">
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Hasta 2 revisiones incluidas</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Stem mix disponible</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Entrega en 5–7 días hábiles</div>
-          </div>
-        </div>
-        <div class="prx-tag">
-          <span class="prx-tag-lbl">Desde</span>
-          <span class="prx-tag-num">120€</span>
-          <span class="prx-tag-unit">por canción</span>
-        </div>
-      </div>
-
-      <!-- Fila 3: info izquierda, etiqueta derecha (destacado) -->
-      <div class="prx-row featured rev-up">
-        <div class="prx-info">
-          <p class="precio-eyebrow">Pack completo</p>
-          <p class="precio-name">Grabación + Mezcla + Master</p>
-          <div class="precio-includes">
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Sesión de grabación (2 horas)</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Mezcla profesional</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Masterización incluida</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>3 revisiones en total</div>
-          </div>
-        </div>
-        <div class="prx-tag featured">
-          <span class="prx-tag-lbl">Desde</span>
-          <span class="prx-tag-num">280€</span>
-          <span class="prx-tag-unit">por canción<br>todo incluido</span>
-          <span class="prx-tag-pop">Más popular</span>
-        </div>
-      </div>
-
-      <!-- Fila 4: etiqueta izquierda, info derecha -->
-      <div class="prx-row prx-flip rev-up">
-        <div class="prx-info">
-          <p class="precio-eyebrow">Masterización</p>
-          <p class="precio-name">Masterización online</p>
-          <div class="precio-includes">
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Optimizado para streaming</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>Versión radio y álbum</div>
-            <div class="precio-inc"><span class="precio-inc-dot"></span>1 revisión incluida</div>
-          </div>
-        </div>
-        <div class="prx-tag">
-          <span class="prx-tag-lbl">Desde</span>
-          <span class="prx-tag-num">55€</span>
-          <span class="prx-tag-unit">por canción</span>
-        </div>
-      </div>
-
-    </div>
-    <div class="precios-footer rev-up">
-      <p class="precios-footer-txt">¿EP o álbum completo? Los proyectos de varios temas tienen <strong>presupuesto especial</strong>. <a href="#contacto">Escríbenos</a> y lo valoramos juntos.</p>
+    <div class="svc-band-price-tag">
+      <span class="svc-band-pt-lbl">Desde</span>
+      <span class="svc-band-pt-num">55€</span>
+      <span class="svc-band-pt-unit">por canción</span>
     </div>
   </section>
 
@@ -6714,7 +6711,6 @@ footer {
             <li><a href="#stem">Escucha</a></li>
             <li><a href="#testimonios">Clientes</a></li>
             <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#precios">Precios</a></li>
             <li><a href="#tienda">Tienda</a></li>
             <li><a href="#faq">FAQ</a></li>
           </ul>
