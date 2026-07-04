@@ -758,6 +758,12 @@ button { font-family: inherit; }
 .ib-cta:hover { background: var(--bronze); color: var(--cream); transform: translateX(4px); }
 
 /* ── SERVICE BANDS ──────────────────────────────────────────── */
+/* Outer wrapper — gives the badge room to peek above the band */
+.svc-band-outer {
+  position: relative;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
 .svc-band {
   position: relative;
   min-height: 82vh;
@@ -765,7 +771,7 @@ button { font-family: inherit; }
   align-items: center;
   overflow: hidden;
   border-radius: clamp(16px, 2vw, 28px);
-  margin: 0 clamp(20px, 3.5vw, 56px) 20px;
+  margin: 0 clamp(20px, 3.5vw, 56px) 0; /* bottom margin moved to .svc-band-outer */
 }
 .svc-band-bg {
   position: absolute;
@@ -796,17 +802,26 @@ button { font-family: inherit; }
 .svc-band--r .svc-band-inner { justify-content: flex-end; }
 .svc-band-text { max-width: 500px; }
 .svc-band-badge {
-  display: inline-block;
+  position: absolute;
+  top: 0;
   font-family: var(--head);
-  font-size: 0.44rem;
+  font-size: 0.58rem;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  padding: 5px 13px;
-  border-radius: var(--r-pill);
+  padding: 10px 28px 22px;
+  border-radius: 6px 6px 0 0;
   background: var(--accent-2);
   color: var(--cream);
-  margin-bottom: 22px;
+  box-shadow: 0 -2px 16px rgba(0,0,0,0.22);
+  white-space: nowrap;
+  z-index: 0;
+}
+.svc-band-outer--l .svc-band-badge {
+  left: clamp(68px, 9vw, 128px);
+}
+.svc-band-outer--r .svc-band-badge {
+  right: clamp(68px, 9vw, 128px);
 }
 .svc-band-num {
   display: block;
@@ -3876,7 +3891,8 @@ footer {
   .svc-band { min-height: 90vh; }
   .svc-band-name { font-size: clamp(2rem, 8vw, 3rem); margin-bottom: 10px; }
   .svc-band-inner { padding: 52px var(--sec-px); }
-  .svc-band-badge { margin-bottom: 14px; }
+  .svc-band-outer--l .svc-band-badge { left: 28px; }
+  .svc-band-outer--r .svc-band-badge { right: 28px; }
   .svc-band-num { margin-bottom: 10px; }
   .svc-band-tag { margin-bottom: 16px; }
   .svc-band-desc { font-size: 0.9rem; line-height: 1.65; margin-bottom: 22px; }
@@ -6112,12 +6128,13 @@ footer {
   </section>
 
   <!-- Banda 01 — Producción Musical -->
+  <div class="svc-band-outer svc-band-outer--l">
+  <span class="svc-band-badge">Destacado</span>
   <section class="svc-band svc-band--l rev">
     <div class="svc-band-bg" style="background-image: url('assets/IMG_7827.jpg'); background-position: center 60%;"></div>
     <div class="svc-band-veil"></div>
     <div class="svc-band-inner">
       <div class="svc-band-text">
-        <span class="svc-band-badge">Destacado</span>
         <span class="svc-band-num">01 — Producción Musical</span>
         <h3 class="svc-band-name">Origen</h3>
         <span class="svc-band-tag">De la idea a la canción terminada</span>
@@ -6140,14 +6157,16 @@ footer {
       <span class="svc-band-pt-unit">por canción</span>
     </div>
   </section>
+  </div><!-- /svc-band-outer 01 -->
 
   <!-- Banda 02 — Grabación Vocal -->
+  <div class="svc-band-outer svc-band-outer--r">
+  <span class="svc-band-badge">Más Vendido</span>
   <section class="svc-band svc-band--r rev">
     <div class="svc-band-bg" style="background-image: url('assets/sesion vocalpost.jpg'); background-position: center 38%;"></div>
     <div class="svc-band-veil"></div>
     <div class="svc-band-inner">
       <div class="svc-band-text">
-        <span class="svc-band-badge">Más Vendido</span>
         <span class="svc-band-num">02 — Grabación Vocal</span>
         <h3 class="svc-band-name">La Toma</h3>
         <span class="svc-band-tag">En sala, con dirección artística real</span>
@@ -6169,14 +6188,16 @@ footer {
       <span class="svc-band-pt-unit">por hora · mín. 2h</span>
     </div>
   </section>
+  </div><!-- /svc-band-outer 02 -->
 
   <!-- Banda 03 — Mezcla -->
+  <div class="svc-band-outer svc-band-outer--l">
+  <span class="svc-band-badge is-orange">Más Popular</span>
   <section class="svc-band svc-band--l rev">
     <div class="svc-band-bg" style="background-image: url('assets/IMG_8502.jpg'); background-position: center 50%;"></div>
     <div class="svc-band-veil"></div>
     <div class="svc-band-inner">
       <div class="svc-band-text">
-        <span class="svc-band-badge is-orange">Más Popular</span>
         <span class="svc-band-num">03 — Mezcla</span>
         <h3 class="svc-band-name">Mix Elevation</h3>
         <span class="svc-band-tag">Tu canción, cada frecuencia en su espacio</span>
@@ -6200,14 +6221,16 @@ footer {
       <span class="svc-band-pt-badge">Más popular</span>
     </div>
   </section>
+  </div><!-- /svc-band-outer 03 -->
 
   <!-- Banda 04 — Masterización -->
+  <div class="svc-band-outer svc-band-outer--r">
+  <span class="svc-band-badge is-orange">Pro</span>
   <section class="svc-band svc-band--r rev">
     <div class="svc-band-bg" style="background-image: url('assets/IMG_3224.jpg'); background-position: center 30%;"></div>
     <div class="svc-band-veil"></div>
     <div class="svc-band-inner">
       <div class="svc-band-text">
-        <span class="svc-band-badge is-orange">Pro</span>
         <span class="svc-band-num">04 — Masterización</span>
         <h3 class="svc-band-name">Master Ready</h3>
         <span class="svc-band-tag">El último paso antes de publicar</span>
@@ -6229,6 +6252,7 @@ footer {
       <span class="svc-band-pt-unit">por canción</span>
     </div>
   </section>
+  </div><!-- /svc-band-outer 04 -->
 
   <!-- ══ DIAGNÓSTICO ══ -->
   <section id="diagnostico">
