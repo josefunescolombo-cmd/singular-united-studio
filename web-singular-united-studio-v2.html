@@ -37,21 +37,21 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
-  scrollbar-color: var(--granate) #E0D9CE;
+  scrollbar-color: var(--granate) #EDE8DF;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: #ECE6DA; }
+::-webkit-scrollbar-track { background: #EDE8DF; }
 ::-webkit-scrollbar-thumb { background: var(--granate); }
 
 /* ── DESIGN TOKENS ─────────────────────────────────────────────── */
 :root {
   /* Cream scale — warmer, more editorial */
-  --cream:      #F4EFE6;
-  --cream-2:    #ECE6DA;
-  --cream-3:    #DCD3C3;
-  --cream-soft: #F8F4ED;
+  --cream:      #F9F7F3;
+  --cream-2:    #F2EDE6;
+  --cream-3:    #E5DDD0;
+  --cream-soft: #FDFCFA;
 
   /* Ink scale — deep warm black, never #000 */
   --ink:        #0E0D0B;
@@ -4373,6 +4373,208 @@ footer {
   .gear-cat-item { font-size: 0.68rem; }
 }
 
+/* ── PHOTO DIVIDER — editorial full-bleed ───────────────────────── */
+.photo-divider {
+  position: relative;
+  height: clamp(460px, 68vh, 780px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.photo-divider-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.06);
+  transition: transform 10s ease;
+}
+.photo-divider:hover .photo-divider-bg { transform: scale(1.1); }
+.photo-divider-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(14,13,11,0.74) 38%, rgba(14,13,11,0.22) 100%);
+}
+.photo-divider-inner {
+  position: relative;
+  z-index: 2;
+  padding: 0 var(--sec-px);
+  max-width: 660px;
+}
+.photo-divider-inner.align-right {
+  margin-left: auto;
+  text-align: right;
+}
+.photo-divider-veil.from-right {
+  background: linear-gradient(to left, rgba(14,13,11,0.74) 38%, rgba(14,13,11,0.22) 100%);
+}
+.photo-divider-eye {
+  font-family: var(--head);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: 18px;
+}
+.photo-divider-h2 {
+  font-family: var(--head);
+  font-size: clamp(2rem, 4.8vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+  margin-bottom: 32px;
+}
+.photo-divider-h2 em {
+  font-style: normal;
+  color: var(--bronze);
+}
+.photo-divider-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--head);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+}
+.photo-divider-btn:hover {
+  background: var(--bronze);
+  color: var(--cream);
+  transform: translateY(-2px);
+}
+@media (max-width: 768px) {
+  .photo-divider { height: clamp(360px, 55vh, 540px); }
+  .photo-divider-h2 { font-size: clamp(1.7rem, 8vw, 2.6rem); }
+  .photo-divider-inner.align-right { margin-left: 0; text-align: left; }
+  .photo-divider-veil.from-right { background: linear-gradient(to right, rgba(14,13,11,0.74) 38%, rgba(14,13,11,0.22) 100%); }
+}
+
+/* ── BLOG — Notas del estudio ───────────────────────────────────── */
+#blog {
+  padding: var(--sec-py) var(--sec-px);
+  background: var(--cream-2);
+}
+.blog-hd {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.blog-see-all {
+  flex-shrink: 0;
+  font-family: var(--head);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bronze);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--bronze);
+  text-decoration: none;
+  transition: gap 0.2s, opacity 0.2s;
+}
+.blog-see-all:hover { gap: 12px; opacity: 0.75; }
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.blog-card {
+  background: var(--cream-soft);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+}
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(14,13,11,0.09);
+}
+.blog-card-img {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+.blog-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+.blog-card:hover .blog-card-img img { transform: scale(1.06); }
+.blog-card-body {
+  padding: 22px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+.blog-card-cat {
+  font-family: var(--head);
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+.blog-card-title {
+  font-family: var(--head);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.blog-card-excerpt {
+  font-size: 0.82rem;
+  line-height: 1.72;
+  color: var(--muted);
+  flex: 1;
+}
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 0.7rem;
+  color: var(--muted-2);
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+}
+.blog-card-meta span + span::before {
+  content: ' · ';
+  margin: 0 6px;
+}
+@media (max-width: 900px) {
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-hd { margin-bottom: 36px; }
+}
+
 </style>
 </head>
 <body>
@@ -4936,6 +5138,17 @@ footer {
     </div>
   </section>
 
+  <!-- ══ PHOTO DIVIDER A — CTA editorial ══ -->
+  <div class="photo-divider">
+    <div class="photo-divider-bg" style="background-image: url('assets/nuevas fotos/IMG_5763.jpg'); background-position: center 38%;"></div>
+    <div class="photo-divider-veil"></div>
+    <div class="photo-divider-inner">
+      <p class="photo-divider-eye">Singular United Studio · Dénia, Alicante</p>
+      <h2 class="photo-divider-h2">Tu siguiente <em>lanzamiento</em><br>merece sonar diferente.</h2>
+      <a href="#reserva" class="photo-divider-btn">Reservar sesión →</a>
+    </div>
+  </div>
+
   <!-- ══ TESTIMONIOS ══ -->
   <section id="testimonios">
     <div class="test-hd rev">
@@ -5484,6 +5697,72 @@ footer {
         </div><!-- /tienda-rail -->
       </div><!-- /tienda-rail-wrap -->
     </div><!-- /tienda-layout -->
+  </section>
+
+  <!-- ══ PHOTO DIVIDER B — editorial derecha ══ -->
+  <div class="photo-divider">
+    <div class="photo-divider-bg" style="background-image: url('assets/galeria de fotos/IMG_3841.jpg'); background-position: center 28%;"></div>
+    <div class="photo-divider-veil from-right"></div>
+    <div class="photo-divider-inner align-right">
+      <p class="photo-divider-eye">El estudio · 15 años de experiencia</p>
+      <h2 class="photo-divider-h2">+15 años.<br>Un sonido.<br><em>Tu visión.</em></h2>
+      <a href="#contacto" class="photo-divider-btn">Hablar con José →</a>
+    </div>
+  </div>
+
+  <!-- ══ BLOG — Notas del estudio ══ -->
+  <section id="blog">
+    <div class="blog-hd">
+      <div class="blog-hd-text rev">
+        <p class="sec-eye">Notas del estudio</p>
+        <h2 class="sec-h2">Aprende con<span class="dim"> cada sesión</span></h2>
+      </div>
+      <a href="#contacto" class="blog-see-all">Ver todos →</a>
+    </div>
+    <div class="blog-grid">
+      <a href="#contacto" class="blog-card rev">
+        <div class="blog-card-img">
+          <img src="assets/nuevas fotos/IMG_5765.jpg" alt="Preparar demo para grabación">
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-cat">Producción</p>
+          <h3 class="blog-card-title">Cómo preparar tu demo para una sesión de grabación profesional</h3>
+          <p class="blog-card-excerpt">Antes de entrar al estudio, hay pasos clave que marcan la diferencia entre una toma mediocre y una toma que suena exactamente como la imaginabas.</p>
+          <div class="blog-card-meta">
+            <span>Jun 2026</span>
+            <span>5 min lectura</span>
+          </div>
+        </div>
+      </a>
+      <a href="#contacto" class="blog-card rev">
+        <div class="blog-card-img">
+          <img src="assets/nuevas fotos/IMG_7747.jpg" alt="Errores al mezclar">
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-cat">Mezcla</p>
+          <h3 class="blog-card-title">5 errores que arruinan una mezcla (y cómo evitarlos)</h3>
+          <p class="blog-card-excerpt">La mezcla no es solo ajustar volúmenes. Es dar espacio, profundidad y carácter. Aquí los errores más frecuentes que vemos entrar al estudio.</p>
+          <div class="blog-card-meta">
+            <span>May 2026</span>
+            <span>7 min lectura</span>
+          </div>
+        </div>
+      </a>
+      <a href="#contacto" class="blog-card rev">
+        <div class="blog-card-img">
+          <img src="assets/galeria de fotos/IMG_7876.jpg" alt="Stem mastering">
+        </div>
+        <div class="blog-card-body">
+          <p class="blog-card-cat">Masterización</p>
+          <h3 class="blog-card-title">Qué es el stem mastering y por qué los artistas serios lo eligen</h3>
+          <p class="blog-card-excerpt">El stem mastering ofrece control total sobre el resultado final. Te explicamos qué es, cómo funciona y cuándo vale la pena invertir en él.</p>
+          <div class="blog-card-meta">
+            <span>Abr 2026</span>
+            <span>6 min lectura</span>
+          </div>
+        </div>
+      </a>
+    </div>
   </section>
 
   <!-- ══ FAQ ══ -->
