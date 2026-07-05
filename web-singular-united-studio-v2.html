@@ -3266,94 +3266,243 @@ footer {
 
 /* ── RESPONSIVE ───────────────────────────────────────────────── */
 /* ── TIENDA FUSIONADA (foto + cards) ────────────────────────── */
+/* ══════════════════════════════════════
+   TIENDA DIGITAL — STORE SECTION
+══════════════════════════════════════ */
 #tienda {
   position: relative;
-  min-height: 640px;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   padding: 0;
-  background: var(--ink);
+  background: #0c0b0a;
 }
-#tienda .sec-eye { color: var(--bronze); }
+#tienda::after {
+  content: '';
+  position: absolute; inset: 0;
+  z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+}
 .tienda-bg {
   position: absolute; inset: 0;
-  background: url('assets/galeria de fotos/IMG_4304.jpg') center center / cover no-repeat;
-  will-change: transform;
+  background: url('assets/galeria de fotos/IMG_4304.jpg') center 30% / cover no-repeat;
+  filter: saturate(0.3) brightness(0.28);
 }
 .tienda-veil {
   position: absolute; inset: 0;
-  background: linear-gradient(105deg,
-    rgba(14,13,11,0.95) 0%,
-    rgba(14,13,11,0.80) 28%,
-    rgba(14,13,11,0.50) 50%,
-    rgba(14,13,11,0.15) 72%,
-    rgba(14,13,11,0) 100%);
+  background: linear-gradient(180deg,
+    rgba(10,9,8,0.88) 0%,
+    rgba(10,9,8,0.74) 45%,
+    rgba(10,9,8,0.90) 100%);
 }
-.tienda-layout {
-  position: relative;
-  z-index: 2;
+
+/* ── Marquee ticker ── */
+.tienda-marquee {
+  position: relative; z-index: 2;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.015);
+  padding: 10px 0;
+}
+.tienda-mq-track {
+  display: flex;
+  width: max-content;
+  animation: tienda-mq 55s linear infinite;
+}
+.tienda-mq-item {
+  font-family: var(--head);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  padding: 0 28px;
+  white-space: nowrap;
+}
+.tienda-mq-dot { color: var(--bronze); padding: 0 2px; }
+@keyframes tienda-mq {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Masthead ── */
+.tienda-masthead {
+  position: relative; z-index: 2;
   display: grid;
-  grid-template-columns: 380px 1fr;
-  align-items: center;
-  width: 100%;
-  padding: 80px 0 80px var(--sec-px);
-  gap: 0;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: clamp(32px, 5vw, 80px);
+  padding: clamp(56px, 8vw, 116px) var(--sec-px) clamp(36px, 5vw, 72px);
 }
-.tienda-text { padding-right: 48px; }
-.tienda-text .sec-h2 {
-  color: var(--cream);
-  font-size: clamp(2.4rem, 4.5vw, 4rem);
-  margin-bottom: 20px;
-}
-.tienda-text .sec-h2 .dim {
-  color: rgba(244,239,230,0.55);
-  font-weight: 300;
-}
-.tienda-text .sec-h2 .hi { color: var(--accent-2); }
-.tienda-text-desc {
-  font-family: var(--body);
-  font-size: 0.95rem;
-  color: rgba(244,239,230,0.58);
-  line-height: 1.75;
-  margin-bottom: 36px;
-  max-width: 320px;
-}
-.tienda-cta {
+.tienda-mh-l { display: flex; flex-direction: column; gap: 18px; }
+.tienda-open-badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 15px 32px;
-  background: var(--cream);
-  color: var(--ink);
+  gap: 8px;
   font-family: var(--head);
-  font-size: 0.65rem;
+  font-size: 0.49rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  border-radius: var(--r-pill);
-  text-decoration: none;
-  transition: background 0.25s, color 0.25s, transform 0.25s;
+  color: rgba(255,255,255,0.45);
 }
-.tienda-cta:hover { background: var(--bronze); color: var(--cream); transform: translateX(4px); }
-/* Rail on dark photo */
+.tienda-open-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #34D399;
+  flex-shrink: 0;
+  animation: store-pulse 2.6s ease-in-out infinite;
+}
+@keyframes store-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52,211,153,0.55); }
+  50%       { opacity: 0.6; box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+}
+.tienda-store-kicker {
+  font-family: var(--head);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--bronze);
+}
+.tienda-store-hd {
+  font-family: var(--head);
+  font-size: clamp(4rem, 9.5vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+}
+.tienda-mh-r {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-bottom: 6px;
+}
+.tienda-store-claim {
+  font-family: var(--head);
+  font-size: clamp(1rem, 1.8vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.65);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.tienda-store-claim strong {
+  color: #fff;
+  font-weight: 800;
+  display: block;
+}
+.tienda-mh-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tienda-mh-pills span {
+  font-family: var(--head);
+  font-size: 0.48rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  border: 1px solid rgba(255,255,255,0.11);
+  padding: 6px 14px;
+  border-radius: 100px;
+}
+
+/* ── Status bar ── */
+.tienda-statusbar {
+  position: relative; z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px var(--sec-px);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(0,0,0,0.25);
+}
+.tienda-sb-inner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.tienda-sb-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.tienda-sb-stat b {
+  font-family: var(--head);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+.tienda-sb-stat span {
+  font-family: var(--head);
+  font-size: 0.42rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.tienda-sb-div {
+  width: 1px; height: 26px;
+  background: rgba(255,255,255,0.1);
+}
+.tienda-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--head);
+  font-size: 0.46rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  transition: opacity 0.5s;
+  animation: hint-nudge 1.8s ease-in-out 1.5s infinite alternate;
+}
+.tienda-scroll-hint.hint-gone { opacity: 0; pointer-events: none; }
+.tienda-scroll-hint svg { width: 26px; height: 13px; }
+@keyframes hint-nudge {
+  from { opacity: 0.6; transform: translateX(0); }
+  to   { opacity: 0.25; transform: translateX(5px); }
+}
+
+/* Rail on dark section */
 .tienda-rail-wrap {
   position: relative;
+  z-index: 2;
   overflow: hidden;
-  padding: 20px 0;
-  -webkit-mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
-  mask-image: linear-gradient(to right, black 0%, black 85%, transparent 100%);
-  transition: -webkit-mask-image 0.3s, mask-image 0.3s;
+  padding: 24px 0 36px;
+  -webkit-mask-image: linear-gradient(to right, black 0%, black 84%, transparent 100%);
+  mask-image: linear-gradient(to right, black 0%, black 84%, transparent 100%);
 }
-.tienda-rail-wrap.rail-scrolled {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 85%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 85%, transparent 100%);
+/* Left fade overlay — appears only after scroll, matches section bg */
+.tienda-rail-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: var(--sec-px);
+  height: 100%;
+  background: linear-gradient(to right, #0c0b0a 30%, transparent 100%);
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s;
 }
+.tienda-rail-wrap.rail-scrolled::before { opacity: 1; }
 .tienda-rail {
   display: flex;
   gap: 18px;
   overflow-x: auto;
-  padding: 4px 0 24px;
+  padding: 4px var(--sec-px) 24px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -4245,10 +4394,11 @@ footer {
   .gal-item { width: 70vw; height: 80vw; }
   .gal-item.tall { height: 92vw; }
   .gal-item.wide { width: 80vw; height: 60vw; }
-  .tienda-intro { grid-template-columns: 1fr; }
-  .tienda-layout { grid-template-columns: 1fr; padding: 56px var(--sec-px); }
-  .tienda-text { padding-right: 0; padding-bottom: 32px; }
-  .tienda-rail-wrap { padding: 0 var(--sec-px); }
+  .tienda-masthead { grid-template-columns: 1fr; gap: 28px; }
+  .tienda-mh-r { padding-bottom: 0; }
+  .tienda-sb-inner { gap: 12px; }
+  .tienda-sb-div { height: 20px; }
+  .tienda-scroll-hint span { display: none; }
   .faq-q-text { font-size: 0.88rem; }
   .test-card { padding: 32px 28px; }
   .rz-services { grid-template-columns: 1fr; }
@@ -6698,16 +6848,70 @@ footer {
     <div class="tienda-bg"></div>
     <div class="tienda-veil"></div>
 
-    <div class="tienda-layout">
-      <!-- Texto izquierda -->
-      <div class="tienda-text rev-l">
-        <p class="sec-eye">Recursos del estudio</p>
-        <h2 class="sec-h2">El mismo sistema<span class="dim">tú mismo</span></h2>
-        <p class="tienda-text-desc">Plantillas, cadenas y guías con las que trabajo a diario — disponibles para que tu música suene desde el primer día.</p>
-        <a href="#" class="tienda-cta">Ver la tienda →</a>
+    <!-- ① Marquee ticker -->
+    <div class="tienda-marquee" aria-hidden="true">
+      <div class="tienda-mq-track">
+        <span class="tienda-mq-item">SINGULAR UNITED STUDIO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">TIENDA DIGITAL</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">PLANTILLAS PRO TOOLS</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">CADENAS VOCALES</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">GUÍAS DE LANZAMIENTO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">B-ROLL DEL ESTUDIO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">PACK GRÁFICO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">CONSULTORÍA EN DIRECTO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">DESCARGA INMEDIATA</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">SINGULAR UNITED STUDIO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">TIENDA DIGITAL</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">PLANTILLAS PRO TOOLS</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">CADENAS VOCALES</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">GUÍAS DE LANZAMIENTO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">B-ROLL DEL ESTUDIO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">PACK GRÁFICO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">CONSULTORÍA EN DIRECTO</span><span class="tienda-mq-dot">◆</span>
+        <span class="tienda-mq-item">DESCARGA INMEDIATA</span><span class="tienda-mq-dot">◆</span>
       </div>
+    </div>
 
-      <!-- Cards deslizables derecha -->
+    <!-- ② Store masthead -->
+    <div class="tienda-masthead">
+      <div class="tienda-mh-l rev">
+        <div class="tienda-open-badge">
+          <span class="tienda-open-dot"></span>TIENDA ABIERTA
+        </div>
+        <div class="tienda-store-kicker">SNGLR. STORE</div>
+        <h2 class="tienda-store-hd">DIGITAL<br>GOODS</h2>
+      </div>
+      <div class="tienda-mh-r rev">
+        <p class="tienda-store-claim">
+          Las herramientas que usamos en cada sesión.<br>
+          <strong>Ahora son tuyas.</strong>
+        </p>
+        <div class="tienda-mh-pills">
+          <span>⚡ Descarga inmediata</span>
+          <span>✦ Uso profesional</span>
+          <span>◎ Pro Tools ready</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ Status bar -->
+    <div class="tienda-statusbar">
+      <div class="tienda-sb-inner">
+        <div class="tienda-sb-stat"><b>10</b><span>Productos</span></div>
+        <div class="tienda-sb-div"></div>
+        <div class="tienda-sb-stat"><b>5</b><span>Categorías</span></div>
+        <div class="tienda-sb-div"></div>
+        <div class="tienda-sb-stat"><b>∞</b><span>Descargas</span></div>
+        <div class="tienda-sb-div"></div>
+        <div class="tienda-sb-stat"><b>24h</b><span>Disponible</span></div>
+      </div>
+      <div class="tienda-scroll-hint" id="tiendaScrollHint">
+        <span>Desliza los productos</span>
+        <svg viewBox="0 0 26 13" fill="none"><path d="M0 6.5h24M19 1.5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <!-- ④ Cards deslizables -->
       <div class="tienda-rail-wrap">
         <div class="tienda-rail">
 
@@ -6983,7 +7187,6 @@ footer {
 
         </div><!-- /tienda-rail -->
       </div><!-- /tienda-rail-wrap -->
-    </div><!-- /tienda-layout -->
   </section>
 
   <!-- ══ BLOG — Notas del estudio ══ -->
@@ -8687,12 +8890,15 @@ document.addEventListener('DOMContentLoaded', function () {
   startProgress();
   tick();
 
-  /* Dynamic fade — left mask only activates after scroll */
+  /* Dynamic left-fade overlay + scroll hint hide */
   const tiendaRail = document.querySelector('.tienda-rail');
   const tiendaWrap = document.querySelector('.tienda-rail-wrap');
+  const tiendaHint = document.getElementById('tiendaScrollHint');
   if (tiendaRail && tiendaWrap) {
     tiendaRail.addEventListener('scroll', () => {
-      tiendaWrap.classList.toggle('rail-scrolled', tiendaRail.scrollLeft > 24);
+      const scrolled = tiendaRail.scrollLeft > 40;
+      tiendaWrap.classList.toggle('rail-scrolled', scrolled);
+      if (scrolled && tiendaHint) tiendaHint.classList.add('hint-gone');
     }, { passive: true });
   }
 });
