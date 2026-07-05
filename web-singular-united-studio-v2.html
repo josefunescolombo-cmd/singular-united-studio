@@ -3503,7 +3503,7 @@ footer {
   display: flex;
   gap: 18px;
   overflow-x: auto;
-  padding: 4px var(--sec-px) 24px;
+  padding: 28px var(--sec-px) 28px;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -3886,7 +3886,7 @@ footer {
   transition: transform 0.48s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 .snglr-card.flipped {
-  transform: translateY(-12px) scale(1.05);
+  transform: translateY(-10px) scale(1.05);
   z-index: 20;
 }
 .snglr-card-inner {
@@ -3905,8 +3905,8 @@ footer {
   flex-direction: column;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  will-change: transform;
   border-radius: 16px;
-  overflow: hidden;
   background: #131415;
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 20px 56px rgba(0,0,0,0.48);
@@ -3917,6 +3917,7 @@ footer {
   transform: rotateY(180deg);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  will-change: transform;
   border-radius: 16px;
   overflow: hidden;
   display: flex;
@@ -3946,6 +3947,7 @@ footer {
   text-transform: uppercase;
   color: #fff;
 }
+.snglr-back-name { display: none; }
 .snglr-back-code {
   font-family: var(--mono, monospace);
   font-size: 0.36rem;
@@ -4155,6 +4157,7 @@ footer {
   padding: 11px 15px 13px;
   background: #131415;
   border-top: 1px solid rgba(255,255,255,0.07);
+  border-radius: 0 0 16px 16px;
 }
 .snglr-buy .shop-price { color: #fff; font-size: 1.06rem; }
 .snglr-buy .shop-price-old {
