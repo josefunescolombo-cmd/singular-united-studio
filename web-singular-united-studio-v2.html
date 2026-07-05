@@ -1980,22 +1980,168 @@ button { font-family: inherit; }
   line-height: 1.75;
 }
 
-.online-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 16px;
-}
-.ol-photo-box {
+#online .sec-h2 { font-size: clamp(1.35rem, 2vw, 1.9rem); }
+
+/* ── INTERNATIONAL SESSIONS showcase ─────────────────────────── */
+.ol-intl {
+  background: #080706;
   border-radius: var(--r-md);
   overflow: hidden;
-  background: var(--ink);
-  aspect-ratio: 4/3;
+  border: 1px solid rgba(255,255,255,0.05);
 }
-.ol-photo-box.tall { aspect-ratio: 3/4; }
-.ol-photos-col { display: grid; grid-template-rows: 1fr 1fr; gap: 16px; }
-.ol-photo-box img {
-  width: 100%; height: 100%;
-  object-fit: cover;
+.ol-intl-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  flex-wrap: wrap;
+}
+.ol-intl-bar-l { display: flex; align-items: center; gap: 10px; }
+.ol-intl-live {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #5ecf8f;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(94,207,143,0.6);
+  animation: intlPulse 2s ease-in-out infinite;
+}
+@keyframes intlPulse {
+  0%,100% { box-shadow:0 0 10px rgba(94,207,143,0.6); opacity:1; }
+  50%     { box-shadow:0 0 4px rgba(94,207,143,0.3); opacity:0.55; }
+}
+.ol-intl-bar-title {
+  font-family: var(--head); font-size: 0.66rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(244,239,230,0.82);
+}
+.ol-intl-bar-live-tag {
+  font-family: var(--head); font-size: 0.6rem; font-weight: 400;
+  color: rgba(94,207,143,0.72); letter-spacing: 0.06em;
+}
+.ol-intl-bar-r {
+  display: flex; gap: 20px; align-items: center;
+}
+.ol-intl-bar-r span {
+  font-family: var(--head); font-size: 0.58rem; font-weight: 600;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: rgba(244,239,230,0.32); white-space: nowrap;
+}
+.ol-intl-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+}
+.ol-intl-main {
+  position: relative; overflow: hidden; aspect-ratio: 4/3;
+  border-right: 1px solid rgba(255,255,255,0.05);
+}
+.ol-intl-main img { width:100%; height:100%; object-fit:cover; display:block; }
+.ol-intl-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,7,6,0.9) 0%, rgba(8,7,6,0.22) 45%, transparent 70%);
+}
+.ol-intl-main-info {
+  position: absolute; bottom:0; left:0; right:0;
+  padding: 20px 22px;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 12px;
+}
+.ol-intl-client {
+  display: flex; align-items: center; gap: 10px;
+}
+.ol-intl-flag { font-size: 1.35rem; }
+.ol-intl-client-name {
+  font-family: var(--head); font-size: 0.8rem; font-weight: 700;
+  color: #f4efe6; letter-spacing: -0.01em; line-height: 1.2;
+}
+.ol-intl-client-sub {
+  font-family: var(--body); font-size: 0.62rem;
+  color: rgba(244,239,230,0.5); margin-top: 3px; letter-spacing: 0.03em;
+}
+.ol-intl-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(8,7,6,0.68);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 5px 11px 5px 8px;
+  font-family: var(--head); font-size: 0.54rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(244,239,230,0.65); flex-shrink: 0;
+  white-space: nowrap;
+}
+.ol-intl-badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #5ecf8f;
+  box-shadow: 0 0 8px rgba(94,207,143,0.7);
+  animation: intlPulse 2s ease-in-out infinite;
+}
+.ol-intl-side {
+  display: grid; grid-template-rows: 1fr 1fr;
+}
+.ol-intl-screen {
+  position: relative; overflow: hidden;
+}
+.ol-intl-screen:first-child { border-bottom: 1px solid rgba(255,255,255,0.05); }
+.ol-intl-screen img {
+  width:100%; height:100%; object-fit:cover;
+  object-position: left center; display:block;
+}
+.ol-intl-screen-veil {
+  position:absolute; inset:0;
+  background: linear-gradient(135deg, transparent 35%, rgba(8,7,6,0.75) 100%);
+}
+.ol-intl-screen-info {
+  position:absolute; bottom:12px; right:14px;
+  text-align:right; display:flex; flex-direction:column; gap:3px;
+}
+.ol-intl-screen-label {
+  font-family: var(--head); font-size: 0.6rem; font-weight:700;
+  letter-spacing: 0.08em; text-transform:uppercase;
+  color: rgba(244,239,230,0.72);
+}
+.ol-intl-screen-meta {
+  font-family: var(--body); font-size: 0.54rem;
+  color: rgba(184,153,104,0.62); letter-spacing: 0.06em;
+}
+.ol-intl-footer {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 36px;
+  padding: 22px 24px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.015);
+}
+.ol-intl-quote {
+  font-family: var(--body); font-size: 0.9rem; font-weight:400;
+  color: rgba(244,239,230,0.58); line-height: 1.7; font-style:italic;
+  margin: 0; padding: 0 0 0 16px; border: none; position:relative;
+}
+.ol-intl-quote::before {
+  content:''; position:absolute; left:0; top:4px; bottom:4px;
+  width:2px; background:var(--bronze); opacity:0.5; border-radius:2px;
+}
+.ol-intl-stats {
+  display:flex; align-items:center; gap:14px; flex-shrink:0;
+}
+.ol-intl-stat { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.ol-intl-stat-n {
+  font-family:var(--head); font-size:1.1rem; font-weight:900;
+  color:#b89968; letter-spacing:-0.02em; line-height:1;
+}
+.ol-intl-stat-l {
+  font-family:var(--head); font-size:0.44rem; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase;
+  color:rgba(244,239,230,0.3); text-align:center; white-space:nowrap;
+}
+.ol-intl-divider { width:1px; height:30px; background:rgba(255,255,255,0.08); }
+@media (max-width: 768px) {
+  .ol-intl-grid { grid-template-columns: 1fr; }
+  .ol-intl-main { aspect-ratio: 16/9; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .ol-intl-side { grid-template-columns: 1fr 1fr; grid-template-rows: auto; min-height: 180px; }
+  .ol-intl-screen:first-child { border-bottom: none; border-right: 1px solid rgba(255,255,255,0.05); }
+  .ol-intl-footer { grid-template-columns: 1fr; gap: 18px; }
+  .ol-intl-stats { flex-wrap: wrap; justify-content: center; }
+  .ol-intl-bar-r { display: none; }
 }
 
 /* ── ONLINE GLOBE — conexiones mundiales ───────────────────────── */
@@ -4543,8 +4689,7 @@ footer {
   .online-steps { grid-template-columns: 1fr; }
   .ol-step-h { border-right: none; border-bottom: 1px solid var(--hairline); }
   .ol-step-h:last-child { border-bottom: none; }
-  .online-grid { grid-template-columns: 1fr; }
-  .faq-side { flex-direction: column; align-items: flex-start; }
+.faq-side { flex-direction: column; align-items: flex-start; }
   .faq-side .faq-help { max-width: 100%; margin-left: 0; }
   .faq-list { grid-template-columns: 1fr; }
   .stem-layout { grid-template-columns: 1fr; gap: 56px; }
@@ -6862,16 +7007,79 @@ footer {
       </div>
     </div>
 
-    <div class="online-grid">
-      <div class="ol-photo-box">
-        <img src="assets/online/foto.jpg" alt="Sesión online en MUSE" loading="lazy" style="object-position: center center;">
-      </div>
-      <div class="ol-photos-col">
-        <div class="ol-photo-box">
-          <img src="assets/online/Captura de pantalla 2025-06-19 a las 22.33.40.png" alt="Pro Tools — sesión remota" loading="lazy">
+    <!-- International sessions showcase -->
+    <div class="ol-intl">
+      <div class="ol-intl-bar">
+        <div class="ol-intl-bar-l">
+          <span class="ol-intl-live"></span>
+          <span class="ol-intl-bar-title">Sesiones internacionales</span>
+          <span class="ol-intl-bar-live-tag">· En activo</span>
         </div>
-        <div class="ol-photo-box">
-          <img src="assets/online/Captura de pantalla 2025-08-07 a las 17.25.04.png" alt="Llamada de revisión" loading="lazy">
+        <div class="ol-intl-bar-r">
+          <span>10+ países</span>
+          <span>3 continentes</span>
+          <span>Audio en tiempo real</span>
+        </div>
+      </div>
+      <div class="ol-intl-grid">
+        <div class="ol-intl-main">
+          <img src="assets/online/foto.jpg" alt="Sesión online — Anthony &amp; José Funes" loading="lazy" style="object-position:center center;">
+          <div class="ol-intl-veil"></div>
+          <div class="ol-intl-main-info">
+            <div class="ol-intl-client">
+              <span class="ol-intl-flag" aria-hidden="true">🇪🇨</span>
+              <div>
+                <div class="ol-intl-client-name">Anthony Reinoso</div>
+                <div class="ol-intl-client-sub">Ecuador · Sesión de mezcla</div>
+              </div>
+            </div>
+            <div class="ol-intl-badge">
+              <span class="ol-intl-badge-dot"></span>
+              Zoom · MUSE
+            </div>
+          </div>
+        </div>
+        <div class="ol-intl-side">
+          <div class="ol-intl-screen">
+            <img src="assets/online/Captura de pantalla 2025-06-19 a las 22.33.40.png" alt="Pro Tools — sesión remota" loading="lazy">
+            <div class="ol-intl-screen-veil"></div>
+            <div class="ol-intl-screen-info">
+              <span class="ol-intl-screen-label">Pro Tools · Mix</span>
+              <span class="ol-intl-screen-meta">128 BPM · 96 kHz</span>
+            </div>
+          </div>
+          <div class="ol-intl-screen">
+            <img src="assets/online/Captura de pantalla 2025-08-07 a las 17.25.04.png" alt="Revisión en tiempo real" loading="lazy">
+            <div class="ol-intl-screen-veil"></div>
+            <div class="ol-intl-screen-info">
+              <span class="ol-intl-screen-label">Escucha en directo</span>
+              <span class="ol-intl-screen-meta">Sin latencia · Revisiones</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ol-intl-footer">
+        <blockquote class="ol-intl-quote">"La distancia no cambia la experiencia — oyes el audio del DAW en tiempo real, ves la pantalla, das feedback. Exactamente como estar aquí."</blockquote>
+        <div class="ol-intl-stats">
+          <div class="ol-intl-stat">
+            <span class="ol-intl-stat-n">10+</span>
+            <span class="ol-intl-stat-l">países</span>
+          </div>
+          <div class="ol-intl-divider"></div>
+          <div class="ol-intl-stat">
+            <span class="ol-intl-stat-n">3</span>
+            <span class="ol-intl-stat-l">continentes</span>
+          </div>
+          <div class="ol-intl-divider"></div>
+          <div class="ol-intl-stat">
+            <span class="ol-intl-stat-n">0ms</span>
+            <span class="ol-intl-stat-l">latencia</span>
+          </div>
+          <div class="ol-intl-divider"></div>
+          <div class="ol-intl-stat">
+            <span class="ol-intl-stat-n">≡</span>
+            <span class="ol-intl-stat-l">misma calidad</span>
+          </div>
         </div>
       </div>
     </div>
@@ -9406,13 +9614,13 @@ document.addEventListener('DOMContentLoaded', function () {
   startProgress();
   tick();
 
-  /* ── Globe animation — conexiones mundiales ── */
+  /* ── Globe animation — multi-trail ── */
   (function() {
     const cnv = document.getElementById('olGlobe');
     if (!cnv) return;
     const ctx = cnv.getContext('2d');
     const cityEl = document.getElementById('olGlobeCity');
-    let W, H, animId, lastTs = 0;
+    let W, H, animId, startTs = 0;
 
     const CITIES = [
       {rx:0.19, ry:0.17, name:'Londres'},
@@ -9426,6 +9634,12 @@ document.addEventListener('DOMContentLoaded', function () {
       {rx:0.61, ry:0.92, name:'Montevideo'},
     ];
     const OX = 0.27, OY = 0.47;
+    const DUR_DRAW = 900, DUR_HOLD = 1400, DUR_FADE = 1800;
+    const DUR_TOTAL = DUR_DRAW + DUR_HOLD + DUR_FADE;
+    const CITY_INTERVAL = 920;
+
+    const trail = [];
+    let nextCidx = 0, lastAddedAt = -CITY_INTERVAL;
 
     function easeOut(t) { return 1-(1-t)*(1-t); }
     function easeSine(t) { return t<0.5?2*t*t:-1+(4-2*t)*t; }
@@ -9445,6 +9659,18 @@ document.addEventListener('DOMContentLoaded', function () {
       };
     }
 
+    function lineProg(age) {
+      if(age < DUR_DRAW) return easeOut(age/DUR_DRAW);
+      return 1;
+    }
+
+    function lineOpacity(age) {
+      if(age < DUR_DRAW) return age/DUR_DRAW;
+      if(age < DUR_DRAW+DUR_HOLD) return 1;
+      if(age < DUR_TOTAL) return 1-easeSine((age-DUR_DRAW-DUR_HOLD)/DUR_FADE);
+      return 0;
+    }
+
     function resize() {
       const DPR=window.devicePixelRatio||1;
       const r=cnv.getBoundingClientRect();
@@ -9453,119 +9679,97 @@ document.addEventListener('DOMContentLoaded', function () {
       ctx.setTransform(DPR,0,0,DPR,0,0);
     }
 
-    let cidx=0, phase='draw', phaseMs=0;
-    let lp=0, lo=1, co=0;
-    const DUR={draw:900,hold:550,fade:550,pause:180};
-
     function drawFrame(ts) {
       animId=requestAnimationFrame(drawFrame);
-      const dt=Math.min(ts-lastTs,60); lastTs=ts;
+      const elapsed=ts-startTs;
       ctx.clearRect(0,0,W,H);
-
       const ox=OX*W, oy=OY*H;
 
-      // Faint all-city base lines + dots
-      CITIES.forEach((c,i)=>{
-        if(i===cidx) return;
+      // Add new city on interval
+      if(elapsed-lastAddedAt >= CITY_INTERVAL) {
+        trail.push({cidx:nextCidx, addedAt:elapsed});
+        if(cityEl){
+          cityEl.style.opacity='0';
+          cityEl.style.transform='translateY(6px)';
+          const nm=CITIES[nextCidx].name;
+          setTimeout(()=>{
+            cityEl.textContent=nm;
+            cityEl.style.opacity='1';
+            cityEl.style.transform='translateY(0)';
+          },150);
+        }
+        nextCidx=(nextCidx+1)%CITIES.length;
+        lastAddedAt=elapsed;
+      }
+
+      // Purge expired
+      while(trail.length>0 && (elapsed-trail[0].addedAt)>DUR_TOTAL) trail.shift();
+
+      // Faint skeleton — all cities always visible at low opacity
+      CITIES.forEach(c=>{
         const cx=c.rx*W, cy=c.ry*H;
         const {x:cpx,y:cpy}=ctrlPt(ox,oy,cx,cy);
         ctx.beginPath(); ctx.moveTo(ox,oy);
         ctx.quadraticCurveTo(cpx,cpy,cx,cy);
-        ctx.strokeStyle='rgba(184,153,104,0.07)';
+        ctx.strokeStyle='rgba(184,153,104,0.05)';
         ctx.lineWidth=0.8; ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx,cy,2,0,Math.PI*2);
-        ctx.fillStyle='rgba(244,239,230,0.18)'; ctx.fill();
+        ctx.beginPath(); ctx.arc(cx,cy,1.8,0,Math.PI*2);
+        ctx.fillStyle='rgba(244,239,230,0.14)'; ctx.fill();
       });
 
-      // Phase tick
-      phaseMs+=dt;
-      const ac=CITIES[cidx];
-      const ax=ac.rx*W, ay=ac.ry*H;
-      const {x:cpx,y:cpy}=ctrlPt(ox,oy,ax,ay);
+      // Draw trail — oldest first so newest is on top
+      trail.forEach(item=>{
+        const age=elapsed-item.addedAt;
+        const lo=lineOpacity(age);
+        if(lo<=0) return;
+        const lp=lineProg(age);
+        const c=CITIES[item.cidx];
+        const cx=c.rx*W, cy=c.ry*H;
+        const {x:cpx,y:cpy}=ctrlPt(ox,oy,cx,cy);
 
-      if(phase==='draw'){
-        lp=easeOut(Math.min(phaseMs/DUR.draw,1));
-        lo=1; co=lp;
-        if(phaseMs>=DUR.draw){phase='hold';phaseMs=0;lp=1;}
-      } else if(phase==='hold'){
-        lp=1; lo=1; co=1;
-        if(phaseMs>=DUR.hold){phase='fade';phaseMs=0;}
-      } else if(phase==='fade'){
-        const t=Math.min(phaseMs/DUR.fade,1);
-        lo=1-easeSine(t); co=lo;
-        if(phaseMs>=DUR.fade){phase='pause';phaseMs=0;lo=0;co=0;}
-      } else {
-        lo=0; co=0;
-        if(phaseMs>=DUR.pause){
-          phase='draw'; phaseMs=0; lp=0;
-          cidx=(cidx+1)%CITIES.length;
-          if(cityEl){
-            cityEl.style.opacity='0';
-            cityEl.style.transform='translateY(6px)';
-            setTimeout(()=>{
-              cityEl.textContent=CITIES[cidx].name;
-              cityEl.style.opacity='1';
-              cityEl.style.transform='translateY(0)';
-            },150);
-          }
-        }
-      }
-
-      // Active animated line
-      if(lo>0&&lp>0){
+        // Animated line
         ctx.beginPath(); ctx.moveTo(ox,oy);
-        const steps=50;
-        for(let i=1;i<=steps;i++){
-          const {x,y}=bezPt(ox,oy,cpx,cpy,ax,ay,(i/steps)*lp);
+        for(let i=1;i<=50;i++){
+          const {x,y}=bezPt(ox,oy,cpx,cpy,cx,cy,(i/50)*lp);
           ctx.lineTo(x,y);
         }
         ctx.strokeStyle=`rgba(184,153,104,${lo*0.72})`;
         ctx.lineWidth=1.5; ctx.stroke();
 
-        // Traveling particle at tip
-        if(lp<1||phase==='draw'||phase==='hold'){
-          const {x:px,y:py}=bezPt(ox,oy,cpx,cpy,ax,ay,lp);
+        // Traveling particle (only during draw phase)
+        if(age<DUR_DRAW){
+          const {x:px,y:py}=bezPt(ox,oy,cpx,cpy,cx,cy,lp);
           const g=ctx.createRadialGradient(px,py,0,px,py,12);
           g.addColorStop(0,`rgba(255,255,255,${lo*0.65})`);
           g.addColorStop(1,'rgba(184,153,104,0)');
-          ctx.beginPath(); ctx.arc(px,py,12,0,Math.PI*2);
-          ctx.fillStyle=g; ctx.fill();
+          ctx.beginPath(); ctx.arc(px,py,12,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
           ctx.beginPath(); ctx.arc(px,py,2.8,0,Math.PI*2);
           ctx.fillStyle=`rgba(255,255,255,${lo})`; ctx.fill();
         }
-      }
 
-      // Active city dot + halo + label
-      if(co>0){
-        const halo=ctx.createRadialGradient(ax,ay,0,ax,ay,18);
-        halo.addColorStop(0,`rgba(184,153,104,${co*0.35})`);
+        // City dot + halo + label
+        const halo=ctx.createRadialGradient(cx,cy,0,cx,cy,18);
+        halo.addColorStop(0,`rgba(184,153,104,${lo*0.35})`);
         halo.addColorStop(1,'rgba(184,153,104,0)');
-        ctx.beginPath(); ctx.arc(ax,ay,18,0,Math.PI*2);
-        ctx.fillStyle=halo; ctx.fill();
-        ctx.beginPath(); ctx.arc(ax,ay,4,0,Math.PI*2);
-        ctx.fillStyle=`rgba(244,239,230,${co*0.92})`; ctx.fill();
-        // label on canvas
-        ctx.font=`700 10px Montserrat, sans-serif`;
-        ctx.fillStyle=`rgba(244,239,230,${co*0.55})`;
-        ctx.textAlign=ax>W*0.68?'right':'left';
-        ctx.fillText(ac.name.toUpperCase(), ax>W*0.68?ax-10:ax+10, ay+4);
+        ctx.beginPath(); ctx.arc(cx,cy,18,0,Math.PI*2); ctx.fillStyle=halo; ctx.fill();
+        ctx.beginPath(); ctx.arc(cx,cy,3.8,0,Math.PI*2);
+        ctx.fillStyle=`rgba(244,239,230,${lo*0.9})`; ctx.fill();
+        ctx.font='700 9.5px Montserrat, sans-serif';
+        ctx.fillStyle=`rgba(244,239,230,${lo*0.5})`;
+        ctx.textAlign=cx>W*0.68?'right':'left';
+        ctx.fillText(c.name.toUpperCase(), cx>W*0.68?cx-10:cx+10, cy+4);
         ctx.textAlign='left';
-      }
+      });
 
-      // Origin: pulsing rings
+      // Origin pulsing rings
       for(let i=0;i<3;i++){
         const t=((ts/2400)+i/3)%1;
-        const r=8+t*44;
-        ctx.beginPath(); ctx.arc(ox,oy,r,0,Math.PI*2);
+        ctx.beginPath(); ctx.arc(ox,oy,8+t*44,0,Math.PI*2);
         ctx.strokeStyle=`rgba(184,153,104,${(1-t)*0.42})`;
         ctx.lineWidth=1; ctx.stroke();
       }
-      // Origin dot
-      ctx.beginPath(); ctx.arc(ox,oy,6,0,Math.PI*2);
-      ctx.fillStyle='#b89968'; ctx.fill();
-      ctx.beginPath(); ctx.arc(ox,oy,3,0,Math.PI*2);
-      ctx.fillStyle='#fff'; ctx.fill();
-      // Origin label
+      ctx.beginPath(); ctx.arc(ox,oy,6,0,Math.PI*2); ctx.fillStyle='#b89968'; ctx.fill();
+      ctx.beginPath(); ctx.arc(ox,oy,3,0,Math.PI*2); ctx.fillStyle='#fff'; ctx.fill();
       ctx.font='700 9px Montserrat, sans-serif';
       ctx.fillStyle='rgba(184,153,104,0.75)';
       ctx.textAlign='left';
@@ -9578,8 +9782,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const obs=new IntersectionObserver(entries=>{
       if(entries[0].isIntersecting){
         resize();
-        if(cityEl){ cityEl.textContent=CITIES[0].name; }
-        lastTs=performance.now();
+        if(cityEl) cityEl.textContent=CITIES[0].name;
+        startTs=performance.now();
+        lastAddedAt=-CITY_INTERVAL;
         requestAnimationFrame(drawFrame);
         obs.disconnect();
       }
@@ -9589,11 +9794,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let resizeTimer;
     window.addEventListener('resize',()=>{
       clearTimeout(resizeTimer);
-      resizeTimer=setTimeout(()=>{
-        cancelAnimationFrame(animId);
-        resize();
-        requestAnimationFrame(drawFrame);
-      },120);
+      resizeTimer=setTimeout(()=>{ cancelAnimationFrame(animId); resize(); },120);
     });
   })();
 
