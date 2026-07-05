@@ -3479,7 +3479,8 @@ footer {
 .tienda-rail-wrap {
   position: relative;
   z-index: 2;
-  overflow: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
   padding: 24px 0 36px;
   -webkit-mask-image: linear-gradient(to right, black 0%, black 84%, transparent 100%);
   mask-image: linear-gradient(to right, black 0%, black 84%, transparent 100%);
@@ -3872,18 +3873,154 @@ footer {
   color: #5ecf8f;
 }
 
-/* ══ SNGLR CARDS v2 — studio ID style ══ */
+/* ══ SNGLR CARDS v2 — studio ID style + 3D flip ══ */
 .snglr-card {
   flex: 0 0 218px;
   display: flex;
   flex-direction: column;
   scroll-snap-align: start;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  perspective: 1200px;
+  transition: transform 0.48s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.snglr-card.flipped {
+  transform: translateY(-12px) scale(1.05);
+  z-index: 20;
+}
+.snglr-card-inner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.72s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.snglr-card.flipped .snglr-card-inner {
+  transform: rotateY(180deg);
+}
+.snglr-front {
+  display: flex;
+  flex-direction: column;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   border-radius: 16px;
   overflow: hidden;
   background: #131415;
   border: 1px solid rgba(255,255,255,0.08);
   box-shadow: 0 20px 56px rgba(0,0,0,0.48);
 }
+.snglr-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.62);
+}
+.snglr-back-hd {
+  padding: 15px 15px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.snglr-back-kicker {
+  font-family: var(--head);
+  font-size: 0.38rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+.snglr-back-name {
+  font-family: var(--head);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  text-transform: uppercase;
+  color: #fff;
+}
+.snglr-back-code {
+  font-family: var(--mono, monospace);
+  font-size: 0.36rem;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.45);
+}
+.snglr-back-body {
+  flex: 1;
+  background: #0e0f10;
+  padding: 12px 15px 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.snglr-back-what {
+  font-family: var(--head);
+  font-size: 0.39rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.snglr-back-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+}
+.snglr-back-list li {
+  font-family: var(--body);
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.3;
+  padding-left: 15px;
+  position: relative;
+}
+.snglr-back-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.42;
+}
+.snglr-back-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 15px 13px;
+  background: #0e0f10;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.snglr-back-buy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.snglr-flip-back {
+  font-family: var(--head);
+  font-size: 0.43rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.27);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.snglr-flip-back:hover { color: rgba(255,255,255,0.7); }
 .snglr-hd {
   display: flex;
   align-items: center;
@@ -6920,271 +7057,553 @@ footer {
 
       <!-- SNGLR.001 Plantilla de Mezcla Pro Tools -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#6B8FA8" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">PROFESSIONAL MIX TEMPLATE</div>
-          <div class="snglr-title" style="color:#7AAEC8">PLANTILLA<br>DE MEZCLA</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">PRO TOOLS · MIX SESSION<br>BUSES &amp; GROUPS READY</div>
-        </div>
-        <div class="snglr-panel" style="background:#3E5D72">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="2" height="16" rx="1" opacity="0.5"/><rect x="8" y="4" width="2" height="16" rx="1" opacity="0.6"/><rect x="12" y="4" width="2" height="16" rx="1"/><rect x="16" y="4" width="2" height="16" rx="1" opacity="0.7"/><rect x="20" y="4" width="2" height="16" rx="1" opacity="0.5"/><rect x="3" y="9" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="7" y="14" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="11" y="7" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="15" y="11" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="19" y="10" width="4" height="3" rx="1" fill="white" stroke="none"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.001</span><span class="snglr-panel-series">MIX SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#6B8FA8" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">PROFESSIONAL MIX TEMPLATE</div>
+              <div class="snglr-title" style="color:#7AAEC8">PLANTILLA<br>DE MEZCLA</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">PRO TOOLS · MIX SESSION<br>BUSES &amp; GROUPS READY</div>
+            </div>
+            <div class="snglr-panel" style="background:#3E5D72">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="4" y="4" width="2" height="16" rx="1" opacity="0.5"/><rect x="8" y="4" width="2" height="16" rx="1" opacity="0.6"/><rect x="12" y="4" width="2" height="16" rx="1"/><rect x="16" y="4" width="2" height="16" rx="1" opacity="0.7"/><rect x="20" y="4" width="2" height="16" rx="1" opacity="0.5"/><rect x="3" y="9" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="7" y="14" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="11" y="7" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="15" y="11" width="4" height="3" rx="1" fill="white" stroke="none"/><rect x="19" y="10" width="4" height="3" rx="1" fill="white" stroke="none"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.001</span><span class="snglr-panel-series">MIX SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">19€</span>
+              <button class="shop-btn add" data-cart-id="plt-mezcla" onclick="cartAdd('plt-mezcla','Plantilla de Mezcla Pro Tools',19)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">19€</span>
-          <button class="shop-btn add" data-cart-id="plt-mezcla" onclick="cartAdd('plt-mezcla','Plantilla de Mezcla Pro Tools',19)">+ Añadir</button>
+          <div class="snglr-back" style="background:#3E5D72">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">PLANTILLA<br>DE MEZCLA</div>
+              <span class="snglr-back-code">SNGLR.001 · MIX SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>Sesión Pro Tools lista para mezclar</li>
+                <li>Buses y grupos pre-configurados</li>
+                <li>Sends de reverb, delay y paralelos</li>
+                <li>Compresores y EQs por grupo</li>
+                <li>Compatible con Pro Tools 2020+</li>
+                <li>Guía de uso incluida</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">19€</span>
+                <button class="shop-btn add" data-cart-id="plt-mezcla" onclick="cartAdd('plt-mezcla','Plantilla de Mezcla Pro Tools',19)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.002 Cadena Vocal de Mezcla -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#4A7A5E" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">PROFESSIONAL VOCAL MIX</div>
-          <div class="snglr-title" style="color:#6AAF88">CADENA<br>DE MEZCLA</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">EQ · COMP · SATURACIÓN<br>DE-ESSER &amp; FX PARALELOS</div>
-        </div>
-        <div class="snglr-panel" style="background:#2E5A40">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="8" width="2" height="10" rx="1" opacity="0.5"/><rect x="6.5" y="5" width="2" height="14" rx="1" opacity="0.7"/><rect x="10" y="3" width="2" height="18" rx="1"/><rect x="13.5" y="5" width="2" height="14" rx="1" opacity="0.7"/><rect x="17" y="8" width="2" height="10" rx="1" opacity="0.5"/><rect x="20.5" y="6" width="2" height="12" rx="1" opacity="0.6"/><path d="M3 19 Q12 13 21 17" stroke="white" stroke-width="1" opacity="0.5" fill="none"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.002</span><span class="snglr-panel-series">MIX SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#4A7A5E" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">PROFESSIONAL VOCAL MIX</div>
+              <div class="snglr-title" style="color:#6AAF88">CADENA<br>DE MEZCLA</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">EQ · COMP · SATURACIÓN<br>DE-ESSER &amp; FX PARALELOS</div>
+            </div>
+            <div class="snglr-panel" style="background:#2E5A40">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="8" width="2" height="10" rx="1" opacity="0.5"/><rect x="6.5" y="5" width="2" height="14" rx="1" opacity="0.7"/><rect x="10" y="3" width="2" height="18" rx="1"/><rect x="13.5" y="5" width="2" height="14" rx="1" opacity="0.7"/><rect x="17" y="8" width="2" height="10" rx="1" opacity="0.5"/><rect x="20.5" y="6" width="2" height="12" rx="1" opacity="0.6"/><path d="M3 19 Q12 13 21 17" stroke="white" stroke-width="1" opacity="0.5" fill="none"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.002</span><span class="snglr-panel-series">MIX SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">15€</span>
+              <button class="shop-btn add" data-cart-id="cad-mezcla" onclick="cartAdd('cad-mezcla','Cadena Vocal de Mezcla',15)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">15€</span>
-          <button class="shop-btn add" data-cart-id="cad-mezcla" onclick="cartAdd('cad-mezcla','Cadena Vocal de Mezcla',15)">+ Añadir</button>
+          <div class="snglr-back" style="background:#2E5A40">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">CADENA<br>DE MEZCLA</div>
+              <span class="snglr-back-code">SNGLR.002 · MIX SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>EQ de mezcla vocal (6 bandas)</li>
+                <li>Compresor con ajuste de paralelo</li>
+                <li>Saturación analógica paralela</li>
+                <li>De-esser afinado para voz</li>
+                <li>Reverb y delay de ambiente</li>
+                <li>Exportable a cualquier DAW</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">15€</span>
+                <button class="shop-btn add" data-cart-id="cad-mezcla" onclick="cartAdd('cad-mezcla','Cadena Vocal de Mezcla',15)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.003 Cadena Vocal de Grabación -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#C07A58" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">PROFESSIONAL RECORDING</div>
-          <div class="snglr-title" style="color:#D08868">CADENA DE<br>GRABACIÓN</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">GAIN · GATE · COMPRESIÓN<br>CAPTURA DESDE EL PRIMER TAKE</div>
-        </div>
-        <div class="snglr-panel" style="background:#7A4A34">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="8" y="2" width="8" height="12" rx="4" stroke="white" stroke-width="1.5" fill="none"/><path d="M5 10c0 3.9 3.1 7 7 7s7-3.1 7-7"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/><line x1="10" y1="7" x2="14" y2="7" opacity="0.5"/><line x1="10" y1="10" x2="14" y2="10" opacity="0.5"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.003</span><span class="snglr-panel-series">REC SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#C07A58" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">PROFESSIONAL RECORDING</div>
+              <div class="snglr-title" style="color:#D08868">CADENA DE<br>GRABACIÓN</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">GAIN · GATE · COMPRESIÓN<br>CAPTURA DESDE EL PRIMER TAKE</div>
+            </div>
+            <div class="snglr-panel" style="background:#7A4A34">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="8" y="2" width="8" height="12" rx="4" stroke="white" stroke-width="1.5" fill="none"/><path d="M5 10c0 3.9 3.1 7 7 7s7-3.1 7-7"/><line x1="12" y1="17" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/><line x1="10" y1="7" x2="14" y2="7" opacity="0.5"/><line x1="10" y1="10" x2="14" y2="10" opacity="0.5"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.003</span><span class="snglr-panel-series">REC SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">15€</span>
+              <button class="shop-btn add" data-cart-id="cad-gra" onclick="cartAdd('cad-gra','Cadena Vocal de Grabación',15)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">15€</span>
-          <button class="shop-btn add" data-cart-id="cad-gra" onclick="cartAdd('cad-gra','Cadena Vocal de Grabación',15)">+ Añadir</button>
+          <div class="snglr-back" style="background:#7A4A34">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">CADENA DE<br>GRABACIÓN</div>
+              <span class="snglr-back-code">SNGLR.003 · REC SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>Ganancia de entrada optimizada</li>
+                <li>Gate para sala de grabación</li>
+                <li>Compresión suave pre-captura</li>
+                <li>Optimizada para micro de estudio</li>
+                <li>Instrucciones paso a paso</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">15€</span>
+                <button class="shop-btn add" data-cart-id="cad-gra" onclick="cartAdd('cad-gra','Cadena Vocal de Grabación',15)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.004 Pack B-Roll -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#7B6F9E" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">STUDIO CONTENT PACK</div>
-          <div class="snglr-title" style="color:#9B8FC0">PACK<br>B-ROLL</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">REELS · STORIES · CLIPS<br>SESIÓN REAL DEL ESTUDIO</div>
-        </div>
-        <div class="snglr-panel" style="background:#4A406A">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M17 9l5-3v12l-5-3"/><line x1="2" y1="10" x2="17" y2="10" opacity="0.4"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.004</span><span class="snglr-panel-series">CONTENT SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#7B6F9E" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">STUDIO CONTENT PACK</div>
+              <div class="snglr-title" style="color:#9B8FC0">PACK<br>B-ROLL</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">REELS · STORIES · CLIPS<br>SESIÓN REAL DEL ESTUDIO</div>
+            </div>
+            <div class="snglr-panel" style="background:#4A406A">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="6" width="15" height="12" rx="2"/><path d="M17 9l5-3v12l-5-3"/><line x1="2" y1="10" x2="17" y2="10" opacity="0.4"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.004</span><span class="snglr-panel-series">CONTENT SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">14€</span>
+              <button class="shop-btn add" data-cart-id="broll" onclick="cartAdd('broll','Pack B-Roll del Estudio',14)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">14€</span>
-          <button class="shop-btn add" data-cart-id="broll" onclick="cartAdd('broll','Pack B-Roll del Estudio',14)">+ Añadir</button>
+          <div class="snglr-back" style="background:#4A406A">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">PACK<br>B-ROLL</div>
+              <span class="snglr-back-code">SNGLR.004 · CONTENT SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>+20 clips reales del estudio</li>
+                <li>Resolución Full HD — MP4</li>
+                <li>Planos de equipos y cabinas</li>
+                <li>Licencia libre para redes</li>
+                <li>Descarga inmediata en ZIP</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">14€</span>
+                <button class="shop-btn add" data-cart-id="broll" onclick="cartAdd('broll','Pack B-Roll del Estudio',14)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.005 Guía Pre-Lanzamiento -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#5880A2" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">PRE-RELEASE GUIDE</div>
-          <div class="snglr-title" style="color:#78A0C4">PRE-<br>LANZAMIENTO</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">PITCHING · PRENSA · PLAYLISTS<br>TODO ANTES DE PUBLICAR</div>
-        </div>
-        <div class="snglr-panel" style="background:#325268">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><polyline points="3 6 4 7 6 4"/><polyline points="3 12 4 13 6 10"/><polyline points="3 18 4 19 6 16"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.005</span><span class="snglr-panel-series">GUIDE SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#5880A2" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">PRE-RELEASE GUIDE</div>
+              <div class="snglr-title" style="color:#78A0C4">PRE-<br>LANZAMIENTO</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">PITCHING · PRENSA · PLAYLISTS<br>TODO ANTES DE PUBLICAR</div>
+            </div>
+            <div class="snglr-panel" style="background:#325268">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><polyline points="3 6 4 7 6 4"/><polyline points="3 12 4 13 6 10"/><polyline points="3 18 4 19 6 16"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.005</span><span class="snglr-panel-series">GUIDE SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">12€</span>
+              <button class="shop-btn add" data-cart-id="guia-pre" onclick="cartAdd('guia-pre','Guía Pre-Lanzamiento',12)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">12€</span>
-          <button class="shop-btn add" data-cart-id="guia-pre" onclick="cartAdd('guia-pre','Guía Pre-Lanzamiento',12)">+ Añadir</button>
+          <div class="snglr-back" style="background:#325268">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">PRE-<br>LANZAMIENTO</div>
+              <span class="snglr-back-code">SNGLR.005 · GUIDE SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>PDF interactivo 30+ páginas</li>
+                <li>Estrategia de pitching a playlists</li>
+                <li>Plantillas de notas de prensa</li>
+                <li>Calendario semana a semana</li>
+                <li>Checklist antes de publicar</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">12€</span>
+                <button class="shop-btn add" data-cart-id="guia-pre" onclick="cartAdd('guia-pre','Guía Pre-Lanzamiento',12)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.006 Guía de Lanzamiento -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#C07848" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">LAUNCH DAY GUIDE</div>
-          <div class="snglr-title" style="color:#D89060">GUÍA DE<br>LANZAMIENTO</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">TIMING · POSTS · NOTIFICACIONES<br>EL DÍA A DÍA DEL LANZAMIENTO</div>
-        </div>
-        <div class="snglr-panel" style="background:#7A4820">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.006</span><span class="snglr-panel-series">GUIDE SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#C07848" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">LAUNCH DAY GUIDE</div>
+              <div class="snglr-title" style="color:#D89060">GUÍA DE<br>LANZAMIENTO</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">TIMING · POSTS · NOTIFICACIONES<br>EL DÍA A DÍA DEL LANZAMIENTO</div>
+            </div>
+            <div class="snglr-panel" style="background:#7A4820">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="none"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.006</span><span class="snglr-panel-series">GUIDE SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">12€</span>
+              <button class="shop-btn add" data-cart-id="guia-lanz" onclick="cartAdd('guia-lanz','Guía de Lanzamiento',12)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">12€</span>
-          <button class="shop-btn add" data-cart-id="guia-lanz" onclick="cartAdd('guia-lanz','Guía de Lanzamiento',12)">+ Añadir</button>
+          <div class="snglr-back" style="background:#7A4820">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">GUÍA DE<br>LANZAMIENTO</div>
+              <span class="snglr-back-code">SNGLR.006 · GUIDE SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>PDF 25+ páginas plan de acción</li>
+                <li>Timing exacto de publicaciones</li>
+                <li>Scripts para stories e historias</li>
+                <li>Estrategia de notificaciones</li>
+                <li>Plantillas de captions listos</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">12€</span>
+                <button class="shop-btn add" data-cart-id="guia-lanz" onclick="cartAdd('guia-lanz','Guía de Lanzamiento',12)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.007 Guía Post-Lanzamiento -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#8A6E8E" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">POST-RELEASE GUIDE</div>
-          <div class="snglr-title" style="color:#AA8EAE">POST-<br>LANZAMIENTO</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">ANALÍTICAS · SEGUNDA OLA<br>PRÓXIMOS PASOS</div>
-        </div>
-        <div class="snglr-panel" style="background:#543860">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20" opacity="0.4"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.007</span><span class="snglr-panel-series">GUIDE SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#8A6E8E" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">POST-RELEASE GUIDE</div>
+              <div class="snglr-title" style="color:#AA8EAE">POST-<br>LANZAMIENTO</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">ANALÍTICAS · SEGUNDA OLA<br>PRÓXIMOS PASOS</div>
+            </div>
+            <div class="snglr-panel" style="background:#543860">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20" opacity="0.4"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.007</span><span class="snglr-panel-series">GUIDE SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">12€</span>
+              <button class="shop-btn add" data-cart-id="guia-post" onclick="cartAdd('guia-post','Guía Post-Lanzamiento',12)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">12€</span>
-          <button class="shop-btn add" data-cart-id="guia-post" onclick="cartAdd('guia-post','Guía Post-Lanzamiento',12)">+ Añadir</button>
+          <div class="snglr-back" style="background:#543860">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">POST-<br>LANZAMIENTO</div>
+              <span class="snglr-back-code">SNGLR.007 · GUIDE SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>PDF 20+ páginas</li>
+                <li>Métricas clave que analizar</li>
+                <li>Plan de segunda ola de contenido</li>
+                <li>Pitching post-release</li>
+                <li>Hoja de ruta al próximo single</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">12€</span>
+                <button class="shop-btn add" data-cart-id="guia-post" onclick="cartAdd('guia-post','Guía Post-Lanzamiento',12)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.008 Pack 3 Guías -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#A88840" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">BUNDLE · AHORRA 7€</div>
-          <div class="snglr-title" style="color:#C8A850">PACK<br>3 GUÍAS</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">PRE + LANZAMIENTO + POST<br>EL SISTEMA COMPLETO</div>
-        </div>
-        <div class="snglr-panel" style="background:#6A5418">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.008</span><span class="snglr-panel-series">BUNDLE SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#A88840" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">BUNDLE · AHORRA 7€</div>
+              <div class="snglr-title" style="color:#C8A850">PACK<br>3 GUÍAS</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">PRE + LANZAMIENTO + POST<br>EL SISTEMA COMPLETO</div>
+            </div>
+            <div class="snglr-panel" style="background:#6A5418">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="none"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.008</span><span class="snglr-panel-series">BUNDLE SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <div><span class="shop-price">29€</span><span class="shop-price-old">36€</span></div>
+              <button class="shop-btn add" data-cart-id="pack-guias" onclick="cartAdd('pack-guias','Pack 3 Guías Completo',29)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <div><span class="shop-price">29€</span><span class="shop-price-old">36€</span></div>
-          <button class="shop-btn add" data-cart-id="pack-guias" onclick="cartAdd('pack-guias','Pack 3 Guías Completo',29)">+ Añadir</button>
+          <div class="snglr-back" style="background:#6A5418">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">PACK<br>3 GUÍAS</div>
+              <span class="snglr-back-code">SNGLR.008 · BUNDLE SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>Guía Pre-Lanzamiento completa</li>
+                <li>Guía de Lanzamiento completa</li>
+                <li>Guía Post-Lanzamiento completa</li>
+                <li>Futuras actualizaciones incluidas</li>
+                <li>Ahorras 7€ vs compra individual</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">29€</span>
+                <button class="shop-btn add" data-cart-id="pack-guias" onclick="cartAdd('pack-guias','Pack 3 Guías Completo',29)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.009 Pack Gráfico -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#8E6878" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">ARTISTS DESIGN PACK</div>
-          <div class="snglr-title" style="color:#AE88A0">PACK<br>GRÁFICO</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">PORTADAS · STORIES · POSTS<br>PLANTILLAS EDITABLES</div>
-        </div>
-        <div class="snglr-panel" style="background:#5A3848">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.009</span><span class="snglr-panel-series">DESIGN SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#8E6878" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">ARTISTS DESIGN PACK</div>
+              <div class="snglr-title" style="color:#AE88A0">PACK<br>GRÁFICO</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">PORTADAS · STORIES · POSTS<br>PLANTILLAS EDITABLES</div>
+            </div>
+            <div class="snglr-panel" style="background:#5A3848">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.009</span><span class="snglr-panel-series">DESIGN SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">19€</span>
+              <button class="shop-btn add" data-cart-id="pack-grafico" onclick="cartAdd('pack-grafico','Pack Gráfico para Artistas',19)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">19€</span>
-          <button class="shop-btn add" data-cart-id="pack-grafico" onclick="cartAdd('pack-grafico','Pack Gráfico para Artistas',19)">+ Añadir</button>
+          <div class="snglr-back" style="background:#5A3848">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">PACK<br>GRÁFICO</div>
+              <span class="snglr-back-code">SNGLR.009 · DESIGN SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>Plantillas de portada de single</li>
+                <li>Templates para historias Instagram</li>
+                <li>Posts cuadrados y verticales</li>
+                <li>Formato Canva / PSD / AI</li>
+                <li>Instrucciones de personalización</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">19€</span>
+                <button class="shop-btn add" data-cart-id="pack-grafico" onclick="cartAdd('pack-grafico','Pack Gráfico para Artistas',19)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- SNGLR.010 Consultoría -->
       <div class="snglr-card">
-        <div class="snglr-hd">
-          <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
-          <div class="snglr-hdiv"></div>
-          <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
-        </div>
-        <div class="snglr-mid">
-          <svg class="snglr-arcs" style="color:#4A8880" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
-          <div class="snglr-cat">PROFESSIONAL CONSULTATION</div>
-          <div class="snglr-title" style="color:#6AAAA2">TU<br>CANCIÓN</div>
-          <div class="snglr-sep"></div>
-          <div class="snglr-desc">30 MIN · SESIÓN EN DIRECTO<br>MEZCLA O LANZAMIENTO</div>
-        </div>
-        <div class="snglr-panel" style="background:#245855">
-          <div class="snglr-panel-row">
-            <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="10" x2="16" y2="10" opacity="0.6"/><line x1="8" y1="14" x2="13" y2="14" opacity="0.6"/></svg></div>
-            <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.010</span><span class="snglr-panel-series">CONSULT SERIES</span></div>
+        <div class="snglr-card-inner">
+          <div class="snglr-front">
+            <div class="snglr-hd">
+              <img class="snglr-logo" src="assets/logo-nav.png" alt="Singular United Studio">
+              <div class="snglr-hdiv"></div>
+              <div class="snglr-brand"><span>SINGULAR</span><span>UNITED</span><span>STUDIO</span></div>
+            </div>
+            <div class="snglr-mid">
+              <svg class="snglr-arcs" style="color:#4A8880" viewBox="0 0 164 164" fill="none"><circle cx="164" cy="164" r="28" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="52" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="76" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="100" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="124" stroke="currentColor" stroke-width="1.5"/><circle cx="164" cy="164" r="150" stroke="currentColor" stroke-width="1.5"/></svg>
+              <div class="snglr-cat">PROFESSIONAL CONSULTATION</div>
+              <div class="snglr-title" style="color:#6AAAA2">TU<br>CANCIÓN</div>
+              <div class="snglr-sep"></div>
+              <div class="snglr-desc">30 MIN · SESIÓN EN DIRECTO<br>MEZCLA O LANZAMIENTO</div>
+            </div>
+            <div class="snglr-panel" style="background:#245855">
+              <div class="snglr-panel-row">
+                <div class="snglr-panel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="10" x2="16" y2="10" opacity="0.6"/><line x1="8" y1="14" x2="13" y2="14" opacity="0.6"/></svg></div>
+                <div class="snglr-panel-meta"><span class="snglr-panel-code">SNGLR.010</span><span class="snglr-panel-series">CONSULT SERIES</span></div>
+              </div>
+              <div class="snglr-panel-sep"></div>
+            </div>
+            <div class="snglr-buy">
+              <span class="shop-price">49€</span>
+              <button class="shop-btn add" data-cart-id="consultoria" onclick="cartAdd('consultoria','Consultoría — Tu Canción al Detalle',49)">+ Añadir</button>
+            </div>
           </div>
-          <div class="snglr-panel-sep"></div>
-        </div>
-        <div class="snglr-buy">
-          <span class="shop-price">49€</span>
-          <button class="shop-btn add" data-cart-id="consultoria" onclick="cartAdd('consultoria','Consultoría — Tu Canción al Detalle',49)">+ Añadir</button>
+          <div class="snglr-back" style="background:#245855">
+            <div class="snglr-back-hd">
+              <span class="snglr-back-kicker">Qué incluye</span>
+              <div class="snglr-back-name">TU<br>CANCIÓN</div>
+              <span class="snglr-back-code">SNGLR.010 · CONSULT SERIES</span>
+            </div>
+            <div class="snglr-back-body">
+              <div class="snglr-back-what">Lo que recibes</div>
+              <ul class="snglr-back-list">
+                <li>Sesión 1:1 de 30 minutos</li>
+                <li>Videollamada o en el estudio</li>
+                <li>Análisis de tu canción al detalle</li>
+                <li>Plan de acción personalizado</li>
+                <li>Grabación de la sesión incluida</li>
+              </ul>
+            </div>
+            <div class="snglr-back-foot">
+              <button class="snglr-flip-back">← Volver</button>
+              <div class="snglr-back-buy">
+                <span class="shop-price">49€</span>
+                <button class="shop-btn add" data-cart-id="consultoria" onclick="cartAdd('consultoria','Consultoría — Tu Canción al Detalle',49)">+ Añadir</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -8892,6 +9311,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
   startProgress();
   tick();
+
+  /* Card flip 3D */
+  const snglrCards = document.querySelectorAll('.snglr-card');
+  snglrCards.forEach(card => {
+    card.addEventListener('click', e => {
+      if (e.target.closest('.shop-btn')) return;
+      const wasFlipped = card.classList.contains('flipped');
+      snglrCards.forEach(c => c.classList.remove('flipped'));
+      if (!wasFlipped) card.classList.add('flipped');
+    });
+  });
 
   /* Dynamic left-fade overlay + scroll hint hide */
   const tiendaRail = document.querySelector('.tienda-rail');
